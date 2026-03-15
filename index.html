@@ -3,76 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BODA AI-Trade | Pro Intelligence</title>
+    <title>BODA AI-Trade Pro | Institutional Intelligence</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <div class="ticker-wrap">
-        <div id="tv-ticker-widget"></div>
+    <div class="ticker-wrapper">
+        <div id="tradingview-ticker"></div>
     </div>
 
     <header class="header">
         <div class="logo">BODA <span>AI-Trade Pro</span></div>
-        <nav class="nav-links">
-            <a href="#" class="nav-item active" data-symbol="BINANCE:BTCUSDT" data-type="crypto">سوق الكريبتو</a>
-            <a href="#" class="nav-item" data-symbol="FX:EURUSD" data-type="forex">سوق الفوركس</a>
-            <a href="#" class="nav-item" data-symbol="OANDA:XAUUSD" data-type="gold">سوق الذهب</a>
+        <nav class="nav-tabs">
+            <a href="#" class="nav-tab active" data-symbol="BINANCE:BTCUSDT" data-type="crypto">سوق الكريبتو</a>
+            <a href="#" class="nav-tab" data-symbol="FX:EURUSD" data-type="forex">سوق الفوركس</a>
+            <a href="#" class="nav-tab" data-symbol="OANDA:XAUUSD" data-type="gold">سوق الذهب</a>
         </nav>
-        <div class="header-right">
-            <a href="https://t.me/Boss_Trading_Signal" target="_blank" class="social-btn telegram"><i class="fab fa-telegram"></i></a>
-            <a href="https://www.tiktok.com/@bo_da.0" target="_blank" class="social-btn tiktok"><i class="fab fa-tiktok"></i></a>
-            <span class="status-tag"><i class="fas fa-circle"></i> الأنظمة متصلة</span>
+        <div class="header-actions">
+            <span class="connection-status"><i class="fas fa-circle"></i> الأنظمة متصلة</span>
+            <a href="https://t.me/Boss_Trading_Signal" target="_blank" class="btn-social btn-telegram"><i class="fab fa-telegram"></i></a>
+            <a href="https://www.tiktok.com/@bo_da.0" target="_blank" class="btn-social btn-tiktok"><i class="fab fa-tiktok"></i></a>
         </div>
     </header>
 
-    <main class="main-layout">
-        <aside class="sidebar-right">
-            <div class="card signal-card">
-                <div class="card-header">AI SIGNAL ANALYSIS</div>
-                <div class="gauge-container">
-                    <div class="gauge">
-                        <div class="gauge-arc"></div>
-                        <div class="gauge-needle" id="needle"></div>
-                    </div>
-                    <div id="signal-label" class="signal-value">تحليل...</div>
-                </div>
-                <div class="stats-row">
-                    <span>قوة الاتجاه: <b id="trend-val">85%</b></span>
-                    <span>مستوى الثقة: <b id="conf-val">90%</b></span>
-                </div>
-            </div>
-
-            <div class="card tips-card">
-                <div class="card-header"><i class="fas fa-lightbulb"></i> PRO INDICATOR TIPS</div>
-                <ul id="ai-tips-list"></ul>
+    <main class="main-dashboard">
+        <aside class="side-panel left-panel">
+            <div class="card full-height">
+                <div class="card-title">GLOBAL FINANCE STREAM</div>
+                <div id="tv-news-timeline"></div>
             </div>
         </aside>
 
-        <section class="chart-area">
-            <div class="card chart-main">
-                <div id="tradingview_main"></div>
+        <section class="center-panel">
+            <div class="card chart-section">
+                <div id="tradingview_main_chart"></div>
             </div>
             
-            <div class="bottom-info-grid">
-                <div class="card info-box">
-                    <div class="card-header"><i class="fas fa-university"></i> INSTITUTIONAL AI INSIGHT</div>
-                    <div id="bank-feed" class="feed-content"></div>
+            <div class="analysis-grid">
+                <div class="card">
+                    <div class="card-title"><i class="fas fa-university"></i> INSTITUTIONAL AI INSIGHT</div>
+                    <div id="institutional-feed" class="scroll-content"></div>
                 </div>
                 
-                <div class="card info-box">
-                    <div class="card-header"><i class="fas fa-chart-pie"></i> TECHNICAL ANALYSIS SUMMARY</div>
-                    <div id="tech-summary-container"></div>
+                <div class="card">
+                    <div class="card-title"><i class="fas fa-chart-line"></i> TECHNICAL ANALYSIS SUMMARY</div>
+                    <div id="technical-summary-widget"></div>
                 </div>
             </div>
         </section>
 
-        <aside class="sidebar-left">
-            <div class="card news-card">
-                <div class="card-header">GLOBAL FINANCE STREAM</div>
-                <div id="global-news-widget"></div>
+        <aside class="side-panel right-panel">
+            <div class="card">
+                <div class="card-title">AI SIGNAL ANALYSIS</div>
+                <div class="gauge-box">
+                    <div class="gauge-container">
+                        <div class="gauge-track"></div>
+                        <div class="gauge-needle" id="signal-needle"></div>
+                    </div>
+                    <div id="signal-output" class="signal-text">جاري التحليل...</div>
+                </div>
+                <div class="signal-metrics">
+                    <div class="metric">قوة الاتجاه: <span id="trend-power">--%</span></div>
+                    <div class="metric">مستوى الثقة: <span id="conf-power">--%</span></div>
+                </div>
+            </div>
+
+            <div class="card tips-section">
+                <div class="card-title">PRO INDICATOR TIPS</div>
+                <ul id="ai-indicator-tips" class="tips-list"></ul>
             </div>
         </aside>
     </main>
