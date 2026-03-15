@@ -3,75 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BODA AI-Trade Pro | Institutional Terminal</title>
+    <title>BODA AI-Trade | Pro Intelligence</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <div class="top-ticker">
-        <div id="tv-ticker-widget"></div>
-    </div>
-
-    <header class="main-header">
-        <div class="logo-area">BODA <span>AI PRO</span></div>
-        <nav class="market-nav">
-            <button class="nav-btn active" data-symbol="BINANCE:BTCUSDT" data-type="crypto">CRYPTO</button>
-            <button class="nav-btn" data-symbol="FX:EURUSD" data-type="forex">FOREX</button>
-            <button class="nav-btn" data-symbol="OANDA:XAUUSD" data-type="gold">GOLD</button>
+    <header class="header">
+        <div class="logo">BODA <span>AI-Trade</span></div>
+        <nav class="nav-links" id="main-nav">
+            <a href="#" class="nav-item active" data-symbol="BINANCE:BTCUSDT" data-type="crypto">الكريبتو</a>
+            <a href="#" class="nav-item" data-symbol="FX:EURUSD" data-type="forex">الفوركس</a>
+            <a href="#" class="nav-item" data-symbol="OANDA:XAUUSD" data-type="gold">الذهب</a>
         </nav>
-        <div class="user-tools">
-            <div class="status-badge"><i class="fas fa-shield-check"></i> AI SECURE</div>
-            <a href="https://t.me/Boss_Trading_Signal" target="_blank" class="social-icon"><i class="fab fa-telegram"></i></a>
-            <a href="https://www.tiktok.com/@bo_da.0" target="_blank" class="social-icon"><i class="fab fa-tiktok"></i></a>
+        <div class="header-right">
+            <span id="market-status" class="status-online">● الأنظمة متصلة</span>
+            <a href="https://t.me/Boss_Trading_Signal" target="_blank" class="social-btn"><i class="fab fa-telegram"></i></a>
+            <a href="https://www.tiktok.com/@bo_da.0" target="_blank" class="social-btn"><i class="fab fa-tiktok"></i></a>
         </div>
     </header>
 
-    <main class="terminal-grid">
-        <aside class="left-aside">
-            <div class="glass-card full-h">
-                <div class="card-title">GLOBAL LIVE FEED</div>
-                <div id="global-news"></div>
+    <main class="dashboard-grid">
+        <aside class="col-side side-left">
+            <div class="card full-height">
+                <div class="card-header"><i class="fas fa-broadcast-tower"></i> GLOBAL NEWS</div>
+                <div id="tv-news-timeline"></div>
             </div>
         </aside>
 
-        <section class="center-stage">
-            <div class="chart-wrapper">
-                <div id="main-tradingview-chart"></div>
+        <section class="col-main">
+            <div class="card chart-container">
+                <div id="tradingview_widget"></div>
             </div>
-            
-            <div class="insights-row">
-                <div class="glass-card">
-                    <div class="card-title"><i class="fas fa-university"></i> INSTITUTIONAL AI FEED</div>
-                    <div id="ai-news-content" class="feed-box"></div>
+
+            <div class="bottom-tools">
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-university"></i> INSTITUTIONAL AI FEED</div>
+                    <div id="ai-news-feed" class="scroll-content"></div>
                 </div>
-                <div class="glass-card">
-                    <div class="card-title"><i class="fas fa-chart-line"></i> TECHNICAL SUMMARY</div>
-                    <div id="tech-analysis-widget"></div>
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-chart-line"></i> TECHNICAL SUMMARY</div>
+                    <div id="tv-tech-summary"></div>
                 </div>
             </div>
         </section>
 
-        <aside class="right-aside">
-            <div class="glass-card">
-                <div class="card-title">AI SIGNAL GAUGE</div>
-                <div class="gauge-wrap">
-                    <div class="gauge-base">
-                        <div class="gauge-progress" id="needle"></div>
-                        <div class="gauge-center"></div>
+        <aside class="col-side side-right">
+            <div class="card">
+                <div class="card-header"><i class="fas fa-robot"></i> AI SIGNAL ANALYSIS</div>
+                <div class="gauge-section">
+                    <div class="gauge-container">
+                        <div class="gauge-body">
+                            <div class="gauge-fill" id="gauge-ptr"></div>
+                            <div class="gauge-cover"></div>
+                        </div>
                     </div>
-                    <div id="signal-text" class="signal-status">جاري الفحص...</div>
+                    <div id="ai-signal-result" class="signal-text">تحليل...</div>
                 </div>
-                <div class="metrics-grid">
-                    <div class="m-item">الاتجاه: <span id="trend-p">--%</span></div>
-                    <div class="m-item">الثقة: <span id="conf-p">--%</span></div>
+                <div class="ai-stats">
+                    <p>قوة الاتجاه: <span id="trend-val">--%</span></p>
+                    <p>المخاطرة: <span id="risk-val">آمن</span></p>
                 </div>
             </div>
 
-            <div class="glass-card flex-grow">
-                <div class="card-title">INDICATOR TIPS AI</div>
-                <ul id="ai-tips-list" class="pro-tips"></ul>
+            <div class="card tips-card">
+                <div class="card-header"><i class="fas fa-lightbulb"></i> INDICATOR TIPS</div>
+                <ul class="suggestion-list" id="indicator-tips"></ul>
             </div>
         </aside>
     </main>
