@@ -1,27 +1,104 @@
-/* نظام الخانات (Tabs) */
-.tab-content {
-    display: none; /* إخفاء كل الخانات افتراضياً */
-    animation: fadeIn 0.5s ease-in-out;
+:root {
+    --bg: #05070a;
+    --card-bg: rgba(21, 26, 39, 0.8);
+    --gold: #d4af37;
+    --green: #00ff88;
+    --red: #ff3366;
+    --text: #ffffff;
 }
 
-.active-tab {
-    display: block; /* إظهار الخانة النشطة فقط */
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Cairo', sans-serif;
+    margin: 0;
+    overflow-x: hidden;
 }
 
-/* تنسيق الشبكة داخل كل خانة */
-.grid-layout {
+/* Header */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 40px;
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo { font-size: 24px; font-weight: 900; }
+.logo span { color: var(--gold); }
+
+.nav-bar a {
+    color: #aaa;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.nav-bar a:hover, .nav-bar a.active { color: var(--gold); }
+
+/* Layout */
+.container { padding: 20px; max-width: 1600px; margin: auto; }
+
+.top-row {
     display: grid;
-    grid-template-columns: 2fr 1fr; /* الشارت يأخذ مساحة أكبر من الأخبار */
+    grid-template-columns: 1fr 2fr;
     gap: 20px;
+    margin-bottom: 20px;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+.main-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 20px;
+    height: 600px;
 }
 
-/* استجابة الشاشات الصغيرة (الموبايل) */
-@media (max-width: 1024px) {
-    .grid-layout { grid-template-columns: 1fr; }
-    nav ul { gap: 10px; font-size: 14px; }
+.card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+h3 { color: var(--gold); font-size: 16px; margin-bottom: 15px; border-right: 3px solid var(--gold); padding-right: 10px; }
+
+/* AI Gauge (عداد الذكاء الاصطناعي) */
+.gauge-container {
+    position: relative;
+    width: 200px;
+    height: 100px;
+    margin: auto;
+}
+.gauge-body {
+    width: 100%; height: 100%;
+    background: #222;
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+    overflow: hidden;
+    position: relative;
+}
+.gauge-fill {
+    position: absolute; top: 100%; left: 0; width: inherit; height: 100%;
+    background: linear-gradient(to right, var(--red), var(--gold), var(--green));
+    transform-origin: center top;
+    transform: rotate(0.25turn); /* سيتغير بالجافاسكريبت */
+    transition: 1s;
+}
+.gauge-cover {
+    width: 70%; height: 70%; background: var(--card-bg);
+    border-radius: 50%; position: absolute; bottom: 0; left: 15%;
+}
+.gauge-value { text-align: center; font-size: 24px; font-weight: bold; margin-top: 10px; }
+
+.x-scroll { height: 500px; overflow-y: auto; }
+
+@media (max-width: 1200px) {
+    .main-grid { grid-template-columns: 1fr; height: auto; }
+    .top-row { grid-template-columns: 1fr; }
 }
