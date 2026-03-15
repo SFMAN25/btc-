@@ -1,85 +1,81 @@
 :root {
-    --bg: #080a0f;
-    --card-bg: #12151c;
-    --border: #242933;
-    --gold: #f0b90b;
+    --bg-dark: #05070a;
+    --card-bg: #0c0e14;
+    --accent: #f0b90b;
     --green: #0ecb81;
     --red: #f6465d;
-    --yellow: #f1c40f;
-    --text: #eaecef;
+    --border: #1e222d;
+    --text-dim: #848e9c;
 }
 
 body {
-    background-color: var(--bg);
-    color: var(--text);
-    margin: 0;
+    background: var(--bg-dark);
+    color: #fff;
     font-family: 'Cairo', sans-serif;
+    margin: 0;
     overflow: hidden;
 }
 
+/* شريط الأسعار */
+.ticker-wrap { height: 40px; background: #12151c; border-bottom: 1px solid var(--border); }
+
 .header {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 10px 25px; background: var(--card-bg); border-bottom: 1px solid var(--border);
+    padding: 5px 20px; background: var(--card-bg); border-bottom: 1px solid var(--border);
 }
 
-.logo { font-size: 22px; font-weight: 900; }
-.logo span { color: var(--gold); }
+.logo { font-weight: 900; font-size: 20px; letter-spacing: 1px; }
+.logo span { color: var(--accent); }
 
-.nav-links a {
-    color: #848e9c; text-decoration: none; margin: 0 15px; font-weight: bold; transition: 0.3s;
+.nav-links .nav-item {
+    color: var(--text-dim); text-decoration: none; margin: 0 15px; font-weight: 700; font-size: 14px;
 }
-.nav-links a.active { color: var(--gold); border-bottom: 2px solid var(--gold); padding-bottom: 5px; }
+.nav-links .nav-item.active { color: var(--accent); border-bottom: 2px solid var(--accent); }
 
-.dashboard-grid {
-    display: grid; grid-template-columns: 300px 1fr 320px;
-    gap: 15px; padding: 15px; height: calc(100vh - 65px);
+.main-layout {
+    display: grid; grid-template-columns: 280px 1fr 300px;
+    gap: 10px; padding: 10px; height: calc(100vh - 90px);
 }
 
 .card {
     background: var(--card-bg); border: 1px solid var(--border);
-    border-radius: 8px; padding: 15px; display: flex; flex-direction: column;
+    border-radius: 4px; display: flex; flex-direction: column;
 }
 
 .card-header {
-    font-size: 14px; color: var(--gold); font-weight: bold;
-    margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 8px;
+    font-size: 12px; font-weight: 900; color: var(--accent);
+    padding: 10px; border-bottom: 1px solid var(--border); letter-spacing: 1px;
 }
 
-/* الشارت */
-.chart-container { flex: 2; min-height: 400px; padding: 0; overflow: hidden; margin-bottom: 15px; border-radius: 8px;}
+/* الشارت العملاق */
+.chart-area { display: flex; flex-direction: column; gap: 10px; overflow-y: auto; }
+.chart-main { flex: 3; min-height: 500px; }
 
-/* أخبار المؤسسات */
-.ai-news-engine { flex: 1; overflow-y: auto; }
-.news-item { background: #1a1e26; padding: 12px; border-radius: 5px; margin-bottom: 8px; border-right: 4px solid var(--gold); transition: 0.3s;}
-.news-item:hover { background: #242933; }
-.news-item p { font-size: 13px; margin: 8px 0 0; line-height: 1.5; color: #d1d4dc;}
-.tag { font-size: 10px; padding: 3px 8px; border-radius: 3px; font-weight: bold; }
-.tag.bank { background: #2d333f; color: var(--gold); }
-.tag.inst { background: #1e2329; color: var(--green); }
+/* منطقة المعلومات تحت الشارت */
+.bottom-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; min-height: 300px; }
 
-/* العداد */
-.gauge-wrapper { position: relative; width: 180px; height: 90px; margin: 15px auto; overflow: hidden; }
-.gauge-body { width: 180px; height: 180px; background: #222; border-radius: 50%; position: relative; }
-.gauge-fill {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: conic-gradient(from 270deg, var(--red) 0%, var(--yellow) 25%, var(--green) 50%, transparent 50%);
-    transform-origin: center; transform: rotate(0turn); transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+/* العداد (مثل الصورة الثانية) */
+.gauge-container { position: relative; padding: 20px; text-align: center; }
+.gauge { width: 160px; height: 80px; margin: 0 auto; position: relative; overflow: hidden; }
+.gauge-arc {
+    width: 160px; height: 160px; border-radius: 50%;
+    background: conic-gradient(from 270deg, var(--red) 0%, var(--accent) 50%, var(--green) 100%);
 }
-.gauge-cover {
-    width: 140px; height: 140px; background: var(--card-bg); border-radius: 50%;
-    position: absolute; bottom: 0; left: 20px;
+.gauge:after {
+    content: ''; position: absolute; top: 15px; left: 15px; right: 15px; bottom: 0;
+    background: var(--card-bg); border-radius: 80px 80px 0 0;
 }
-.signal-text { text-align: center; font-size: 18px; font-weight: 900; margin-top: 15px; transition: 0.5s; }
-.ai-details p { display: flex; justify-content: space-between; font-size: 13px; margin: 8px 0; font-weight: bold;}
+.gauge-needle {
+    position: absolute; bottom: 0; left: 50%; width: 4px; height: 70px;
+    background: #fff; transform-origin: bottom center; transform: rotate(-90deg);
+    transition: 1.5s cubic-bezier(0.17, 0.67, 0.83, 0.67); z-index: 10;
+}
 
-/* المؤشرات */
-.suggestion-list { list-style: none; padding: 0; margin: 0; }
-.suggestion-list li { font-size: 13px; margin-bottom: 12px; color: #b7bdc6; background: #1a1e26; padding: 10px; border-radius: 5px;}
-.suggestion-list li b { color: var(--gold); }
-.suggestion-list i { margin-left: 8px; color: var(--gold); }
+.signal-value { font-size: 22px; font-weight: 900; margin-top: 15px; }
 
-/* الأزرار العلوية */
-.status-online { color: var(--green); font-size: 13px; margin-right: 15px; font-weight: bold;}
-.tiktok-btn { background: #000; color: #fff; padding: 6px 15px; border-radius: 15px; text-decoration: none; font-size: 13px; font-weight: bold; margin-right: 10px; transition: 0.3s;}
-.tiktok-btn:hover { opacity: 0.8; }
-.telegram-btn { background: #229ED9; }
+/* القوائم والأخبار */
+.feed-content { padding: 10px; font-size: 13px; color: var(--text-dim); line-height: 1.6; }
+.news-item-ai { border-right: 3px solid var(--accent); background: #161a1e; padding: 8px; margin-bottom: 8px; }
+
+.status-tag { font-size: 11px; color: var(--green); margin-left: 15px; }
+.social-btn { color: #fff; margin: 0 5px; font-size: 18px; }
