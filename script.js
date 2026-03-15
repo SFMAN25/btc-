@@ -1,135 +1,123 @@
-// قاعدة بيانات لمحاكاة تحليل الذكاء الاصطناعي للأخبار والمؤشرات
-const aiDatabase = {
+// قاعدة بيانات لمحاكاة أخبار المؤسسات واقتراحات المؤشرات
+const marketData = {
     "BINANCE:BTCUSDT": {
         news: [
-            { source: "FED Update", text: "توقعات بتثبيت الفائدة تدعم العملات الرقمية كملاذ عالي المخاطر." },
-            { source: "J.P. Morgan", text: "زيادة في تدفقات السيولة المؤسسية نحو البيتكوين هذا الأسبوع." }
+            { source: "FED", msg: "الفيدرالي الأمريكي يلمح لثبات الفائدة، مما يعزز صعود الأصول الرقمية." },
+            { source: "JP Morgan", msg: "توقعات بزيادة تدفق السيولة المؤسسية نحو صناديق الـ ETF للبيتكوين." }
         ],
-        tips: ["فعل مؤشر MACD لمراقبة التقاطع الإيجابي", "استخدم RSI لتحديد مناطق التشبع فوق 70", "راقب EMA 200 كمستوى دعم رئيسي"]
+        tips: ["مؤشر RSI يظهر زخم شرائي قوي", "تقاطع إيجابي في MACD على فريم الساعة", "استخدم Bollinger Bands لمراقبة التذبذب"]
     },
     "FX:EURUSD": {
         news: [
-            { source: "ECB", msg: "تصريحات لاغارد حول التضخم تزيد من قوة اليورو أمام الدولار." },
-            { source: "Goldman Sachs", msg: "توقعات بهبوط الدولار نتيجة بيانات التوظيف الضعيفة." }
+            { source: "ECB", msg: "البنك المركزي الأوروبي يراقب التضخم، واليورو يستقر أمام الدولار." },
+            { source: "Bank of America", msg: "توقعات بحركة عرضية لزوج EUR/USD حتى صدور بيانات التوظيف." }
         ],
-        tips: ["استخدم Bollinger Bands لمراقبة الانفجار السعري القادم", "راقب مستويات Fibonacci عند 1.0850", "فعل مؤشر Stochastic للارتداد اللحظي"]
+        tips: ["مؤشر الاستوكاستك في منطقة تشبع بيعي", "راقب مستويات الدعم عند 1.0850", "مؤشر ATR يظهر ضعف في التقلبات الحالية"]
     },
     "OANDA:XAUUSD": {
         news: [
-            { source: "Central Banks", msg: "البنوك المركزية تزيد من احتياطيات الذهب، مما يدفع السعر لمستويات تاريخية." },
-            { source: "Fed Pivot", msg: "احتمالية خفض الفائدة في يونيو ترفع جاذبية الذهب كمخزن للقيمة." }
+            { source: "Global Reserve", msg: "زيادة طلب البنوك المركزية على الذهب كملاذ آمن في ظل التوترات." },
+            { source: "Goldman Sachs", msg: "توقعات بوصول الذهب لمستويات تاريخية جديدة بنهاية الربع الثاني." }
         ],
-        tips: ["استخدم Ichimoku Cloud لتحديد الاتجاه القوي", "راقب مستوى 2150$ كدعم مؤسساتي", "RSI يظهر تشبع شرائي، انتظر التصحيح"]
+        tips: ["الذهب فوق EMA 200 - الاتجاه العام صاعد", "تشبع شرائي لحظي على مؤشر RSI", "استخدم Fibonacci لتحديد أهداف الارتداد"]
     }
 };
 
-let currentSymbol = "BINANCE:BTCUSDT";
+let mainChart = null;
 
-// وظيفة تهيئة الشارتات والودجتات
-function initDashboard(symbol) {
-    // 1. الشارت الرئيسي (العملاق)
-    new TradingView.widget({
+// وظيفة تهيئة المنصة حسب العملة المختارة
+function initPlatform(symbol) {
+    // 1. تفعيل الشارت الرئيسي
+    if (mainChart) { document.getElementById('tv_main_chart').innerHTML = ''; }
+    mainChart = new TradingView.widget({
         "autosize": true,
         "symbol": symbol,
         "interval": "60",
         "theme": "dark",
         "style": "1",
-        "locale": "ar_AE",
+        "locale": "ar",
         "container_id": "tv_main_chart"
     });
 
-    // 2. شارت المؤشرات (RSI/MACD)
-    new TradingView.widget({
-        "autosize": true,
-        "symbol": symbol,
-        "interval": "60",
-        "theme": "dark",
-        "style": "3",
-        "hide_top_toolbar": true,
-        "studies": ["RSI@tv-basicstudies", "MACD@tv-basicstudies"],
-        "container_id": "tv_indicators_chart"
-    });
-
-    updateTechnicalWidgets(symbol);
-    updateAIAnalysis(symbol);
-}
-
-// تحديث الودجتات الجانبية (ملخص فني + أخبار حية)
-function updateTechnicalWidgets(symbol) {
-    // التقييم الفني
-    const techContainer = document.getElementById('tv-technical-summary');
-    techContainer.innerHTML = '';
-    const techScript = document.createElement('script');
-    techScript.src = "https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js";
-    techScript.async = true;
-    techScript.innerHTML = JSON.stringify({
-        "interval": "1h", "width": "100%", "height": "100%",
-        "symbol": symbol, "showIntervalTabs": true, "locale": "ar", "colorTheme": "dark"
-    });
-    techContainer.appendChild(techScript);
-
-    // شريط الأخبار الحية
-    const newsContainer = document.getElementById('tv-news-timeline');
-    newsContainer.innerHTML = '';
-    const newsScript = document.createElement('script');
-    newsScript.src = "https://s3.tradingview.com/external-embedding/embed-widget-timeline.js";
-    newsScript.async = true;
-    newsScript.innerHTML = JSON.stringify({
-        "feedMode": "all_symbols", "symbol": symbol, "colorTheme": "dark",
-        "width": "100%", "height": "100%", "locale": "ar"
-    });
-    newsContainer.appendChild(newsScript);
-}
-
-// محرك تحليل الذكاء الاصطناعي (أخبار المؤسسات + العداد + النصائح)
-function updateAIAnalysis(symbol) {
-    const data = aiDatabase[symbol] || aiDatabase["BINANCE:BTCUSDT"];
+    // 2. تحديث نبض السوق (الأخبار) والاقتراحات
+    updateAIContent(symbol);
     
-    // تحديث أخبار المؤسسات
-    const newsFeed = document.getElementById('ai-institutional-feed');
+    // 3. تحديث الودجتات الفنية الجانبية
+    updateTechnicalWidgets(symbol);
+}
+
+function updateAIContent(symbol) {
+    const data = marketData[symbol] || marketData["BINANCE:BTCUSDT"];
+    
+    // تحديث الأخبار الاقتصادية
+    const newsFeed = document.getElementById('ai-news-feed');
     newsFeed.innerHTML = data.news.map(n => `
         <div class="news-item">
-            <span class="source">${n.source || n.bank}</span>
-            <p>${n.text || n.msg}</p>
+            <b><i class="fas fa-university"></i> ${n.source} Insight</b>
+            <p>${n.msg}</p>
         </div>
     `).join('');
 
     // تحديث اقتراحات المؤشرات
-    const tipsBox = document.getElementById('ai-indicator-tips');
-    tipsBox.innerHTML = data.tips.map(t => `
-        <div class="suggestion-item"><i class="fas fa-check-circle"></i> ${t}</div>
-    `).join('');
+    const tipsList = document.getElementById('indicator-tips');
+    tipsList.innerHTML = data.tips.map(t => `<li><i class="fas fa-check"></i> ${t}</li>`).join('');
 
-    // تحريك العداد (Simulation)
-    const needle = document.getElementById('gauge-needle');
-    const aiText = document.getElementById('ai-text');
-    const aiPercent = document.getElementById('ai-percent');
+    // محاكاة إشارة العداد
+    simulateSignal();
+}
+
+function updateTechnicalWidgets(symbol) {
+    // تحديث الملخص الفني
+    const techBox = document.getElementById('tv-tech-summary');
+    techBox.innerHTML = '';
+    const scriptTech = document.createElement('script');
+    scriptTech.src = "https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js";
+    scriptTech.async = true;
+    scriptTech.innerHTML = JSON.stringify({
+        "interval": "1h", "width": "100%", "height": "300",
+        "symbol": symbol, "showIntervalTabs": true, "locale": "ar", "colorTheme": "dark"
+    });
+    techBox.appendChild(scriptTech);
+
+    // تحديث التايم لاين للأخبار
+    const newsBox = document.getElementById('tv-news-timeline');
+    newsBox.innerHTML = '';
+    const scriptNews = document.createElement('script');
+    scriptNews.src = "https://s3.tradingview.com/external-embedding/embed-widget-timeline.js";
+    scriptNews.async = true;
+    scriptNews.innerHTML = JSON.stringify({
+        "feedMode": "all_symbols", "colorTheme": "dark", "width": "100%", "height": "400", "locale": "ar"
+    });
+    newsBox.appendChild(scriptNews);
+}
+
+function simulateSignal() {
+    const ptr = document.getElementById('gauge-ptr');
+    const signalText = document.getElementById('ai-signal-result');
+    const conf = document.getElementById('ai-confidence');
+    const random = Math.random();
     
-    const randomVal = Math.random();
-    const confidence = Math.floor(Math.random() * (95 - 82 + 1) + 82);
-    aiPercent.innerText = confidence + "%";
-
-    if(randomVal > 0.5) {
-        needle.style.transform = `rotate(45deg)`;
-        aiText.innerText = "صاعد / Bullish";
-        aiText.style.color = "#0ecb81";
+    conf.innerText = Math.floor(random * 20 + 75) + "%";
+    
+    if(random > 0.5) {
+        ptr.style.transform = `rotate(0.4turn)`;
+        signalText.innerText = "صاعد / STRONG BUY";
+        signalText.style.color = "#0ecb81";
     } else {
-        needle.style.transform = `rotate(-45deg)`;
-        aiText.innerText = "هابط / Bearish";
-        aiText.style.color = "#f6465d";
+        ptr.style.transform = `rotate(0.1turn)`;
+        signalText.innerText = "هابط / STRONG SELL";
+        signalText.style.color = "#f6465d";
     }
 }
 
-// التنقل بين الأسواق (ذهب، فوركس، كريبتو)
-document.querySelectorAll('.nav-item').forEach(item => {
-    item.addEventListener('click', function(e) {
+// أزرار التنقل
+document.querySelectorAll('.nav-item').forEach(btn => {
+    btn.addEventListener('click', function(e) {
         e.preventDefault();
-        document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+        document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
         this.classList.add('active');
-        
-        const symbol = this.getAttribute('data-symbol');
-        initDashboard(symbol);
+        initPlatform(this.getAttribute('data-symbol'));
     });
 });
 
-window.onload = () => initDashboard(currentSymbol);
+window.onload = () => initPlatform("BINANCE:BTCUSDT");
