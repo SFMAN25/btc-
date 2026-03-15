@@ -1,21 +1,16 @@
-// بيانات لمحاكاة الأخبار المؤسسية واقتراحات المؤشرات
-const marketData = {
+const marketSettings = {
     "BINANCE:BTCUSDT": {
-        news: [{ s: "FED", m: "الفيدرالي يلمح لثبات الفائدة، مما يدعم زخم البيتكوين." }, { s: "JP Morgan", m: "توقعات بدخول سيولة مؤسسية ضخمة هذا الأسبوع." }],
-        tips: ["مؤشر RSI فوق 60 - زخم صاعد", "تقاطع MACD إيجابي", "راقب دعم 65,000"]
+        news: ["FED: توقعات بتثبيت الفائدة تدعم العملات الرقمية.", "J.P. MORGAN: زيادة تدفقات السيولة نحو البيتكوين هذا الأسبوع."],
+        tips: ["تجاوز RSI مستوى 60 إشارة زخم", "راقب تقاطع المتوسطات السعرية"]
     },
     "FX:EURUSD": {
-        news: [{ s: "ECB", m: "البنك المركزي الأوروبي يراقب التضخم، واليورو يستقر." }, { s: "BofA", m: "توقعات بحركة عرضية لزوج EUR/USD." }],
-        tips: ["مؤشر الاستوكاستك في تشبع بيعي", "راقب كسر مستوى 1.0850", "ضعف في التقلبات السعرية"]
-    },
-    "OANDA:XAUUSD": {
-        news: [{ s: "Gold Council", m: "زيادة طلب البنوك المركزية على الذهب كملاذ آمن." }, { s: "Goldman Sachs", m: "توقعات بوصول الذهب لقمم تاريخية جديدة." }],
-        tips: ["الاتجاه العام صاعد فوق EMA 200", "RSI يقترب من تشبع شرائي", "استخدم فيبوناتشي لتحديد الأهداف"]
+        news: ["ECB: البنك الأوروبي يراقب معدلات التضخم بدقة.", "توقعات باستقرار اليورو مقابل الدولار حالياً."],
+        tips: ["مؤشر الاستوكاستك في مناطق تشبع", "راقب كسر الدعم عند 1.0820"]
     }
 };
 
 function updateDashboard(symbol) {
-    // 1. تحديث الشارت الرئيسي [cite: 120]
+    // 1. إعادة بناء الشارت الكبير
     document.getElementById('tv_main_chart').innerHTML = '';
     new TradingView.widget({
         "autosize": true,
@@ -27,41 +22,36 @@ function updateDashboard(symbol) {
         "container_id": "tv_main_chart"
     });
 
-    // 2. تحديث الأخبار والاقتراحات
-    const data = marketData[symbol] || marketData["BINANCE:BTCUSDT"];
-    document.getElementById('ai-news-feed').innerHTML = data.news.map(n => `
-        <div class="bank-news-item"><b>${n.s}:</b> ${n.m}</div>
-    `).join('');
-    
-    document.getElementById('indicator-tips').innerHTML = data.tips.map(t => `
-        <li style="margin-bottom:8px;"><i class="fas fa-check-circle" style="color:var(--gold);"></i> ${t}</li>
-    `).join('');
+    // 2. تحديث أخبار المؤسسات والمؤشرات
+    const data = marketSettings[symbol] || marketSettings["BINANCE:BTCUSDT"];
+    document.getElementById('ai-news-feed').innerHTML = data.news.map(n => `<div class="bank-news-item">${n}</div>`).join('');
+    document.getElementById('indicator-tips').innerHTML = data.tips.map(t => `<li><i class="fas fa-check" style="color:var(--gold)"></i> ${t}</li>`).join('');
 
-    // 3. تحديث ملخص التحليل الفني (تحت الأخبار) [cite: 107, 108]
-    const techContainer = document.getElementById('tv-tech-analysis-content');
+    // 3. تحديث ملخص التحليل الفني (تحت أخبار البنوك)
+    const techContainer = document.getElementById('tv-technical-analysis');
     techContainer.innerHTML = '';
-    const techScript = document.createElement('script');
-    techScript.src = "https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js";
-    techScript.async = true;
-    techScript.innerHTML = JSON.stringify({
+    const script = document.createElement('script');
+    script.src = "https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js";
+    script.async = true;
+    script.innerHTML = JSON.stringify({
         "interval": "1h", "width": "100%", "height": "100%",
         "symbol": symbol, "showIntervalTabs": true, "locale": "ar_AE", "colorTheme": "dark"
     });
-    techContainer.appendChild(techScript);
+    techContainer.appendChild(script);
 
-    // 4. تحديث التايم لاين الجانبي [cite: 113]
-    const newsContainer = document.getElementById('tv-news-timeline');
-    newsContainer.innerHTML = '';
+    // 4. تحديث التايم لاين الجانبي
+    const newsDiv = document.getElementById('tv-news-timeline');
+    newsDiv.innerHTML = '';
     const newsScript = document.createElement('script');
     newsScript.src = "https://s3.tradingview.com/external-embedding/embed-widget-timeline.js";
     newsScript.async = true;
     newsScript.innerHTML = JSON.stringify({
         "feedMode": "all_symbols", "colorTheme": "dark", "width": "100%", "height": "100%", "locale": "ar_AE"
     });
-    newsContainer.appendChild(newsScript);
+    newsDiv.appendChild(newsScript);
 }
 
-// ربط أزرار التنقل [cite: 130]
+// تشغيل الأزرار
 document.querySelectorAll('.nav-item').forEach(btn => {
     btn.addEventListener('click', function(e) {
         e.preventDefault();
