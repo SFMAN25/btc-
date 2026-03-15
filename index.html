@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BODA AI-Trade | Dashboard</title>
+    <title>BODA AI-Trade | Premium Dashboard</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -21,7 +21,6 @@
     </header>
 
     <main class="dashboard-grid">
-        
         <div class="col-left">
             <div class="card ai-card">
                 <div class="card-header"><i class="fas fa-microchip"></i> AI Signal Analysis</div>
@@ -44,35 +43,32 @@
 
         <div class="col-center">
             <div class="card chart-card">
-                <div id="tv_main_chart" style="height: 100%; width: 100%;"></div>
+                <div id="tv_main_chart"></div>
             </div>
 
             <div class="card insight-card">
-                <div class="card-header"><i class="fas fa-university"></i> AI Economic Insight (Bank & Institutional Feed)</div>
-                <div id="ai-news-feed" class="news-content"></div>
+                <div class="card-header"><i class="fas fa-university"></i> AI Economic Insight (Bank Feed)</div>
+                <div id="ai-news-feed"></div>
             </div>
 
-            <div class="card tech-summary-card">
-                <div class="card-header"><i class="fas fa-chart-line"></i> Technical Analysis Summary</div>
-                <div id="tv-technical-analysis" style="height: 350px;"></div>
+            <div class="card indicators-card">
+                <div class="card-header"><i class="fas fa-chart-bar"></i> RSI & MACD Technical Summary</div>
+                <div id="tv_indicators_summary"></div>
             </div>
         </div>
 
         <div class="col-right">
             <div class="card news-card">
                 <div class="card-header"><i class="fas fa-newspaper"></i> Live Finance Stream</div>
-                <div id="tv-news-timeline" style="height: 500px;"></div>
+                <div id="tv-news-timeline"></div>
             </div>
 
             <div class="card alerts-card">
                 <div class="card-header"><i class="fas fa-bell"></i> Opportunity Alerts</div>
-                <div class="alerts-grid">
-                    <div class="alert-box gold"><span>BTC/USDT</span><small>Strong Buy</small></div>
-                    <div class="alert-box silver"><span>ETH/USDT</span><small>Buy</small></div>
-                </div>
+                <div class="alerts-grid" id="alerts-container">
+                    </div>
             </div>
         </div>
-
     </main>
 
     <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
