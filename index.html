@@ -64,34 +64,13 @@
                         <div class="gauge-needle" id="gauge-needle"></div>
                     </div>
                     <div class="ai-result-text" id="ai-text">صاعد / Bullish</div>
-                    <div class="ai-confidence">ثقة الذكاء الاصطناعي: <span id="ai-percent">85%</span></div>
+                    <div class="ai-confidence">نسبة قوة الإشارة: <span id="ai-percent">85%</span></div>
                 </div>
             </div>
 
-            <div class="card news-card">
-                <div class="card-header"><i class="fas fa-newspaper"></i> آخر أخبار Investing</div>
-                <iframe src="https://sslecal2.investing.com?columns=exc_flags,exc_actual,exc_forecast,exc_previous&importance=2,3&features=datepicker,timezone&calType=day&timeZone=15&lang=18" width="100%" height="280" frameborder="0"></iframe>
-            </div>
-        </div>
-
-        <div class="col-center">
-            <div class="card chart-card">
-                <div id="tv_main_chart" style="height: 100%; width: 100%;"></div>
-            </div>
-
-            <div class="card twitter-card">
-                <div class="card-header"><i class="fab fa-x-twitter"></i> نبض السوق المباشر (X)</div>
-                <div class="twitter-wrap">
-                    <a class="twitter-timeline" data-theme="dark" data-height="250" href="https://twitter.com/CoinDesk?ref_src=twsrc%5Etfw">أخبار الكريبتو العالمية</a> 
-                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-right">
             <div class="card tech-card">
-                <div class="card-header"><i class="fas fa-chart-pie"></i> Technical Analysis</div>
-                <div class="tradingview-widget-container" style="height: 400px;">
+                <div class="card-header"><i class="fas fa-chart-pie"></i> Technical Rating</div>
+                <div class="tradingview-widget-container" style="height: 280px;">
                     <div class="tradingview-widget-container__widget"></div>
                     <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>
                     {
@@ -106,6 +85,37 @@
                     "colorTheme": "dark"
                     }
                     </script>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-center">
+            <div class="card chart-card">
+                <div id="tv_main_chart" style="width: 100%; height: 100%;"></div>
+            </div>
+
+            <div class="card indicators-card">
+                <div class="card-header"><i class="fas fa-chart-bar"></i> RSI & MACD Indicators</div>
+                <div id="tv_indicators_chart" style="width: 100%; height: 100%;"></div>
+            </div>
+        </div>
+
+        <div class="col-right">
+            <div class="card news-card">
+                <div class="card-header"><i class="fas fa-newspaper"></i> أحدث الأخبار المباشرة</div>
+                <div class="tradingview-widget-container" style="height: 350px;">
+                  <div class="tradingview-widget-container__widget"></div>
+                  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
+                  {
+                  "feedMode": "all_symbols",
+                  "colorTheme": "dark",
+                  "isTransparent": true,
+                  "displayMode": "regular",
+                  "width": "100%",
+                  "height": "100%",
+                  "locale": "ar_AE"
+                  }
+                  </script>
                 </div>
             </div>
 
