@@ -1,51 +1,82 @@
-/* تنسيق الشاشة العملاقة للشارت */
-.main-dashboard {
-    display: grid;
-    /* تقليل عرض القوائم الجانبية لإعطاء مساحة عرضية للشارت */
-    grid-template-columns: 200px 1fr 240px; 
-    gap: 5px;
-    padding: 5px;
-    height: calc(100vh - 70px); /* استغلال طول الشاشة بالكامل */
-}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BODA AI-Trade Pro | Institutional Terminal</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
 
-.center-panel {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
+    <div class="top-ticker">
+        <div id="tv-ticker-widget"></div>
+    </div>
 
-/* تكبير الشارت لـ 75% من مساحة المنتصف */
-.chart-section {
-    flex: 3; 
-    min-height: 65vh; /* يضمن أن الشارت يأخذ أغلب الطول */
-    border: 2px solid var(--border);
-}
+    <header class="main-header">
+        <div class="logo-area">BODA <span>AI PRO</span></div>
+        <nav class="market-nav">
+            <button class="nav-btn active" data-symbol="BINANCE:BTCUSDT" data-type="crypto">CRYPTO</button>
+            <button class="nav-btn" data-symbol="FX:EURUSD" data-type="forex">FOREX</button>
+            <button class="nav-btn" data-symbol="OANDA:XAUUSD" data-type="gold">GOLD</button>
+        </nav>
+        <div class="user-tools">
+            <div class="status-badge"><i class="fas fa-shield-check"></i> AI SECURE</div>
+            <a href="https://t.me/Boss_Trading_Signal" target="_blank" class="social-icon"><i class="fab fa-telegram"></i></a>
+            <a href="https://www.tiktok.com/@bo_da.0" target="_blank" class="social-icon"><i class="fab fa-tiktok"></i></a>
+        </div>
+    </header>
 
-/* تصغير منطقة الأدوات السفلية */
-.analysis-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5px;
-    flex: 1;
-    max-height: 25vh; /* تحديد طول الأدوات السفلية ليبقى الشارت كبيراً */
-}
+    <main class="terminal-grid">
+        <aside class="left-aside">
+            <div class="glass-card full-h">
+                <div class="card-title">GLOBAL LIVE FEED</div>
+                <div id="global-news"></div>
+            </div>
+        </aside>
 
-/* تحسين الخطوط والمساحات لتناسب الحجم الصغير للأدوات */
-.card-title {
-    font-size: 10px;
-    padding: 5px 10px;
-}
+        <section class="center-stage">
+            <div class="chart-wrapper">
+                <div id="main-tradingview-chart"></div>
+            </div>
+            
+            <div class="insights-row">
+                <div class="glass-card">
+                    <div class="card-title"><i class="fas fa-university"></i> INSTITUTIONAL AI FEED</div>
+                    <div id="ai-news-content" class="feed-box"></div>
+                </div>
+                <div class="glass-card">
+                    <div class="card-title"><i class="fas fa-chart-line"></i> TECHNICAL SUMMARY</div>
+                    <div id="tech-analysis-widget"></div>
+                </div>
+            </div>
+        </section>
 
-.scroll-content {
-    font-size: 11px;
-    padding: 5px;
-}
+        <aside class="right-aside">
+            <div class="glass-card">
+                <div class="card-title">AI SIGNAL GAUGE</div>
+                <div class="gauge-wrap">
+                    <div class="gauge-base">
+                        <div class="gauge-progress" id="needle"></div>
+                        <div class="gauge-center"></div>
+                    </div>
+                    <div id="signal-text" class="signal-status">جاري الفحص...</div>
+                </div>
+                <div class="metrics-grid">
+                    <div class="m-item">الاتجاه: <span id="trend-p">--%</span></div>
+                    <div class="m-item">الثقة: <span id="conf-p">--%</span></div>
+                </div>
+            </div>
 
-/* جعل العداد أصغر قليلاً ليوفر مساحة */
-.gauge-box {
-    padding: 10px 5px;
-}
-.gauge-container {
-    width: 120px;
-    height: 60px;
-}
+            <div class="glass-card flex-grow">
+                <div class="card-title">INDICATOR TIPS AI</div>
+                <ul id="ai-tips-list" class="pro-tips"></ul>
+            </div>
+        </aside>
+    </main>
+
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
