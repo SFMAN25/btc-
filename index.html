@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BODA | Financial Intelligence</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <span class="up">BTC/USD $64,200 ▲</span>
+            <span class="down">ETH/USD $3,400 ▼</span>
+            <span class="up">GOLD $2,150 ▲</span>
+            <span class="down">EUR/USD 1.0850 ▼</span>
+        </div>
+    </div>
+
+    <header>
+        <div class="logo">
+            <h1>BODA <span>AI-Trade</span></h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">الرئيسية</a></li>
+                <li><a href="#">الكريبتو</a></li>
+                <li><a href="#">الفوركس</a></li>
+                <li><a href="#">الذهب</a></li>
+            </ul>
+        </nav>
+        <a href="https://www.tiktok.com/@bo_da.0" target="_blank" class="tiktok-btn">
+            <i class="fab fa-tiktok"></i> تابعني على تيك توك
+        </a>
+    </header>
+
+    <main class="dashboard">
+        
+        <section class="widget chart-widget">
+            <h2><i class="fas fa-chart-line"></i> التحليل الفني المباشر</h2>
+            <div id="tradingview_chart" style="height: 400px;"></div>
+        </section>
+
+        <section class="widget ai-news-widget">
+            <h2><i class="fas fa-robot"></i> رادار الذكاء الاصطناعي</h2>
+            <div id="ai-news-feed" class="news-feed">
+                </div>
+        </section>
+
+        <section class="widget twitter-widget">
+            <h2><i class="fab fa-x-twitter"></i> نبض المحللين</h2>
+            <div class="tweet-box">
+                <p class="tweet-author">@EATrading0</p>
+                <p>السيولة تتجه نحو البيتكوين، كسر مستوى 65k سيعني انطلاقة قوية.</p>
+                <span class="tweet-time">قبل 15 دقيقة</span>
+            </div>
+             <div class="tweet-box">
+                <p class="tweet-author">@Boda_Analytics</p>
+                <p>مراقبة بيانات التضخم الأمريكية اليوم، تأثير مباشر متوقع على الذهب والدولار.</p>
+                <span class="tweet-time">قبل ساعة</span>
+            </div>
+        </section>
+
+    </main>
+
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
