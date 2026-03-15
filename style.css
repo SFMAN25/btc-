@@ -1,65 +1,61 @@
 :root {
-    --bg-main: #0b0e11;
-    --bg-card: #181a20;
+    --bg-dark: #0b0e11;
+    --card-bg: #181a20;
     --gold: #FCD535;
     --green: #0ecb81;
     --red: #f6465d;
-    --text-main: #EAECEF;
     --border: #2b3139;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
-body { background-color: var(--bg-main); color: var(--text-main); overflow: hidden; }
+body { background: var(--bg-dark); color: #fff; height: 100vh; overflow: hidden; }
 
-.header { display: flex; justify-content: space-between; align-items: center; background: var(--bg-card); padding: 15px 30px; border-bottom: 1px solid var(--border); }
-.logo { font-size: 26px; font-weight: 800; color: #fff; }
+.header {
+    height: 60px; display: flex; justify-content: space-between; align-items: center;
+    padding: 0 20px; background: var(--card-bg); border-bottom: 1px solid var(--border);
+}
+.logo { font-size: 22px; font-weight: 900; }
 .logo span { color: var(--gold); }
-.nav-links a { color: #888; text-decoration: none; margin: 0 15px; font-weight: 600; font-size: 16px; transition: 0.3s; }
-.nav-links a:hover, .nav-links a.active { color: var(--gold); border-bottom: 2px solid var(--gold); padding-bottom: 5px; }
-.tiktok { color: var(--bg-main); text-decoration: none; font-weight: bold; background: var(--gold); padding: 8px 15px; border-radius: 20px; transition: 0.3s;}
+.nav-links .nav-item { color: #848e9c; text-decoration: none; margin: 0 15px; font-weight: bold; font-size: 15px; }
+.nav-item.active { color: var(--gold); border-bottom: 2px solid var(--gold); }
+.tiktok { background: var(--gold); color: #000; padding: 6px 12px; border-radius: 5px; text-decoration: none; font-weight: bold; }
 
-.dashboard-grid {
+.dashboard {
     display: grid;
-    grid-template-columns: 280px 1fr 320px; 
-    gap: 15px;
-    padding: 15px;
-    height: calc(100vh - 80px);
+    grid-template-columns: 300px 1fr 300px; /* تقسيم الشاشة لثلاث أعمدة */
+    gap: 10px;
+    height: calc(100vh - 60px);
+    padding: 10px;
 }
 
-.col-left, .col-right { display: flex; flex-direction: column; gap: 15px; }
+.side-col { display: flex; flex-direction: column; gap: 10px; height: 100%; overflow: hidden; }
+.center-col { display: flex; flex-direction: column; gap: 10px; height: 100%; overflow-y: auto; }
 
-.col-center { display: flex; flex-direction: column; gap: 15px; overflow-y: auto; padding-right: 5px; flex: 1; min-height: 600px; }
+.card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; display: flex; flex-direction: column; overflow: hidden; }
+.card-header { background: #20242b; padding: 8px 12px; font-size: 14px; font-weight: bold; color: var(--gold); border-bottom: 1px solid var(--border); }
 
-/* ترتيب المؤشرات جنباً إلى جنب في المنتصف */
-.indicators-wrapper { display: flex; gap: 15px; min-height: 350px; flex-shrink: 0; }
-.indicators-wrapper .card { flex: 1; margin: 0; }
+/* الشارتات */
+.main-chart-box { flex: 2; min-height: 450px; }
+#tv_main_chart { height: 100%; width: 100%; }
 
-.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 15px; display: flex; flex-direction: column; }
-.card-header { font-size: 15px; color: var(--gold); font-weight: 700; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+.market-pulse { flex: 0.5; min-height: 120px; }
+.news-scroll { padding: 10px; font-size: 13px; color: #eaecef; }
 
-.chart-card { min-height: 550px; flex-shrink: 0; }
-.insight-card { min-height: 150px; flex-shrink: 0; }
-
-.bank-news-item { background: #1e222d; padding: 10px; border-radius: 6px; margin-bottom: 8px; border-right: 4px solid var(--gold); font-size: 13px; }
-.tips-list { list-style: none; padding: 0; font-size: 14px; color: #b7bdc6; }
-.tips-list li { margin-bottom: 10px; border-left: 3px solid var(--green); padding-left: 8px; }
+.indicators-box { flex: 1.5; min-height: 300px; }
+.bottom-widgets { display: grid; grid-template-columns: 1fr 300px; gap: 10px; height: 100%; padding: 5px; }
+#tv_indicators_chart, #tv_tech_rating { height: 100%; width: 100%; }
 
 /* العداد */
-.gauge-box { text-align: center; margin-top: 10px; }
-.gauge { width: 220px; height: 110px; margin: 0 auto; position: relative; overflow: hidden; }
-.gauge-bg { width: 220px; height: 220px; border-radius: 50%; background: conic-gradient(from 270deg, var(--red) 0deg, var(--gold) 90deg, var(--green) 180deg, transparent 180deg); position: absolute; top: 0; left: 0; }
-.gauge-cover { width: 180px; height: 180px; background: var(--bg-card); border-radius: 50%; position: absolute; top: 20px; left: 20px; }
-.gauge-needle { width: 4px; height: 100px; background: #fff; position: absolute; bottom: 0; left: 108px; transform-origin: bottom center; transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1); border-radius: 4px; z-index: 10; }
-.ai-result-text { font-size: 24px; font-weight: 800; color: var(--green); margin-top: 15px; }
-.ai-confidence { color: #888; font-size: 14px; margin-top: 5px; }
-.ai-confidence span { color: var(--gold); font-weight: bold; }
+.gauge-container { text-align: center; padding: 20px 10px; }
+.gauge { width: 180px; height: 90px; margin: 0 auto; position: relative; overflow: hidden; }
+.gauge-bg { width: 180px; height: 180px; border-radius: 50%; background: conic-gradient(from 270deg, var(--red) 0deg, var(--gold) 90deg, var(--green) 180deg, transparent 180deg); }
+.gauge-needle { width: 3px; height: 80px; background: #fff; position: absolute; bottom: 0; left: 88px; transform-origin: bottom center; transition: 1s; }
+.status-text { font-size: 20px; font-weight: 900; margin-top: 10px; }
 
-.alerts-grid { display: flex; justify-content: space-between; gap: 10px; }
-.alert-box { background: var(--bg-main); padding: 15px 10px; text-align: center; border-radius: 8px; flex: 1; border-top: 3px solid var(--gold); border: 1px solid var(--border); }
-.alert-box i { font-size: 24px; margin-bottom: 10px; display: block; color: var(--gold); }
-.alert-box span { display: block; font-size: 14px; font-weight: bold; color: var(--text-main); }
-.alert-box small { color: var(--green); font-size: 12px; font-weight: bold; }
+.tips-list { list-style: none; padding: 10px; }
+.tips-list li { font-size: 12px; margin-bottom: 8px; border-right: 3px solid var(--green); padding-right: 8px; color: #b7bdc6; }
 
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg-main); }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+.news-card { flex: 1; }
+#tv_news_timeline { height: 100%; }
+
+.bank-news { background: #2b3139; padding: 8px; margin-bottom: 5px; border-radius: 4px; border-left: 3px solid var(--gold); }
