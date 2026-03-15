@@ -1,32 +1,54 @@
-// مصفوفة لمحاكاة جلب الأخبار من Investing و X وتحليلها
-const marketSignals = [
-    { source: "Investing", asset: "XAU/USD (الذهب)", news: "ارتفاع التضخم الأمريكي بشكل غير متوقع", sentiment: "Bullish", ai_advice: "الذكاء الاصطناعي يتوقع ضغط شرائي على الذهب كملاذ آمن. الهدف القادم 2180." },
-    { source: "X (EAtrading)", asset: "BTC/USDT", news: "اختراق منطقة سيولة 64,500", sentiment: "Bullish", ai_advice: "التحليل الفني يدعم الاستمرار. الذكاء الاصطناعي يرجح صعود للـ 67k." },
-    { source: "Investing", asset: "EUR/USD", news: "بيانات سلبية من المركزي الأوروبي", sentiment: "Bearish", ai_advice: "توقعات بهبوط الزوج. يفضل البحث عن فرص بيع." }
-];
+// 1. برمجة تفعيل الخانات (Tabs Logic)
+const navLinks = document.querySelectorAll('#nav-links a');
+const tabContents = document.querySelectorAll('.tab-content');
 
-function updateAISignals() {
-    const container = document.getElementById('ai-analysis-container');
-    container.innerHTML = ''; // مسح المحتوى القديم
-
-    marketSignals.forEach(sig => {
-        const signalDiv = document.createElement('div');
-        signalDiv.className = `ai-box ${sig.sentiment === 'Bullish' ? 'positive' : 'negative'}`;
+navLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault(); // منع إعادة تحميل الصفحة
         
-        signalDiv.innerHTML = `
-            <div class="sig-header">
-                <span class="asset-tag">${sig.asset}</span>
-                <span class="source-tag">${sig.source}</span>
-            </div>
-            <h3>${sig.news}</h3>
-            <p class="ai-impact">إشارة AI: <strong>${sig.sentiment === 'Bullish' ? 'صعود 🟢' : 'هبوط 🔴'}</strong></p>
-            <p class="ai-analysis">${sig.ai_advice}</p>
-        `;
-        container.appendChild(signalDiv);
+        // إزالة اللون الذهبي (النشط) من كل الأزرار
+        navLinks.forEach(l => l.classList.remove('active'));
+        // إعطاء اللون الذهبي للزر اللي تم الضغط عليه
+        this.classList.add('active');
+
+        // إخفاء كل المحتوى
+        tabContents.forEach(tab => {
+            tab.classList.remove('active-tab');
+            tab.classList.add('hidden');
+        });
+
+        // إظهار المحتوى الخاص بالزر بناءً على data-target
+        const targetId = this.getAttribute('data-target');
+        const targetContent = document.getElementById(targetId);
+        targetContent.classList.remove('hidden');
+        targetContent.classList.add('active-tab');
+    });
+});
+
+// 2. تفعيل شارتات TradingView لكل قسم مخصص
+function createChart(containerId, symbol) {
+    new TradingView.widget({
+        "autosize": true,
+        "symbol": symbol,
+        "interval": "60", // شارت الساعة
+        "timezone": "Etc/UTC",
+        "theme": "dark",
+        "style": "1",
+        "locale": "ar_AE",
+        "enable_publishing": false,
+        "backgroundColor": "#151a27",
+        "gridColor": "rgba(255, 255, 255, 0.06)",
+        "hide_top_toolbar": false,
+        "hide_legend": false,
+        "save_image": false,
+        "container_id": containerId
     });
 }
 
-// تشغيل التحديث عند التحميل
-window.onload = () => {
-    updateAISignals();
+// استدعاء الشارتات فور تحميل الصفحة
+window.onload = function() {
+    createChart("tv_home", "BINANCE:BTCUSDT"); // الرئيسية (بيتكوين كواجهة)
+    createChart("tv_crypto", "BINANCE:BTCUSDT"); // قسم الكريبتو
+    createChart("tv_forex", "FX:EURUSD"); // قسم الفوركس (يورو/دولار)
+    createChart("tv_gold", "OANDA:XAUUSD"); // قسم الذهب (أونصة الذهب)
 };
