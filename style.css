@@ -1,82 +1,51 @@
-:root {
-    --bg-main: #050608;
-    --bg-card: #0c0e12;
-    --accent: #f0b90b;
-    --green: #0ecb81;
-    --red: #f6465d;
-    --border: #1e222d;
-    --text: #d1d4dc;
-}
-
-body {
-    background-color: var(--bg-main);
-    color: var(--text);
-    margin: 0;
-    font-family: 'Cairo', sans-serif;
-    overflow: hidden;
-}
-
-.ticker-wrapper { height: 35px; background: #12151c; border-bottom: 1px solid var(--border); }
-
-.header {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 8px 20px; background: var(--bg-card); border-bottom: 1px solid var(--border);
-}
-
-.logo { font-size: 18px; font-weight: 900; letter-spacing: 0.5px; }
-.logo span { color: var(--accent); }
-
-.nav-tabs .nav-tab {
-    color: #848e9c; text-decoration: none; margin: 0 12px; font-weight: 700; font-size: 13px;
-    transition: 0.3s; padding-bottom: 5px;
-}
-.nav-tabs .nav-tab.active { color: var(--accent); border-bottom: 2px solid var(--accent); }
-
+/* تنسيق الشاشة العملاقة للشارت */
 .main-dashboard {
-    display: grid; grid-template-columns: 260px 1fr 280px;
-    gap: 8px; padding: 8px; height: calc(100vh - 85px);
+    display: grid;
+    /* تقليل عرض القوائم الجانبية لإعطاء مساحة عرضية للشارت */
+    grid-template-columns: 200px 1fr 240px; 
+    gap: 5px;
+    padding: 5px;
+    height: calc(100vh - 70px); /* استغلال طول الشاشة بالكامل */
 }
 
-.card {
-    background: var(--bg-card); border: 1px solid var(--border);
-    border-radius: 4px; display: flex; flex-direction: column; position: relative;
+.center-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
+/* تكبير الشارت لـ 75% من مساحة المنتصف */
+.chart-section {
+    flex: 3; 
+    min-height: 65vh; /* يضمن أن الشارت يأخذ أغلب الطول */
+    border: 2px solid var(--border);
+}
+
+/* تصغير منطقة الأدوات السفلية */
+.analysis-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    flex: 1;
+    max-height: 25vh; /* تحديد طول الأدوات السفلية ليبقى الشارت كبيراً */
+}
+
+/* تحسين الخطوط والمساحات لتناسب الحجم الصغير للأدوات */
 .card-title {
-    font-size: 11px; font-weight: 800; color: var(--accent);
-    padding: 10px; border-bottom: 1px solid var(--border); background: #131722;
+    font-size: 10px;
+    padding: 5px 10px;
 }
 
-.chart-section { flex: 2.5; min-height: 480px; }
-.analysis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; flex: 1; margin-top: 8px; }
-
-/* العداد الاحترافي */
-.gauge-box { padding: 20px 10px; text-align: center; }
-.gauge-container { width: 150px; height: 75px; margin: 0 auto; position: relative; overflow: hidden; }
-.gauge-track {
-    width: 150px; height: 150px; border-radius: 50%;
-    background: conic-gradient(from 270deg, var(--red) 0%, #f1c40f 40%, var(--green) 100%);
-}
-.gauge-container::after {
-    content: ''; position: absolute; top: 12px; left: 12px; right: 12px; bottom: 0;
-    background: var(--bg-card); border-radius: 75px 75px 0 0;
-}
-.gauge-needle {
-    position: absolute; bottom: 0; left: 50%; width: 3px; height: 60px;
-    background: #fff; transform-origin: bottom center; transform: rotate(-90deg);
-    transition: 1.5s cubic-bezier(0.25, 0.1, 0.25, 1); z-index: 5;
+.scroll-content {
+    font-size: 11px;
+    padding: 5px;
 }
 
-.signal-text { font-size: 18px; font-weight: 900; margin-top: 15px; }
-.signal-metrics { padding: 0 15px 15px; font-size: 12px; }
-.metric { display: flex; justify-content: space-between; margin-bottom: 5px; font-weight: bold; }
-
-.tips-list { list-style: none; padding: 10px; margin: 0; }
-.tips-list li {
-    font-size: 12px; margin-bottom: 8px; background: #161a1e;
-    padding: 8px; border-radius: 3px; border-right: 3px solid var(--accent);
+/* جعل العداد أصغر قليلاً ليوفر مساحة */
+.gauge-box {
+    padding: 10px 5px;
 }
-
-.scroll-content { padding: 10px; overflow-y: auto; font-size: 12px; line-height: 1.5; color: #b7bdc6; }
-.btn-social { color: #fff; margin-left: 10px; font-size: 16px; transition: 0.3s; }
-.btn-social:hover { color: var(--accent); }
+.gauge-container {
+    width: 120px;
+    height: 60px;
+}
