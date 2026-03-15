@@ -1,90 +1,83 @@
-const BODA_AI_CONFIG = {
-    crypto: { symbol: "BINANCE:BTCUSDT", news: ["تدفقات مؤسسية ضخمة نحو BTC.", "الفيدرالي قد يثبت الفائدة مما يدعم الكريبتو."], tips: ["RSI تحت 30 = فرصة", "MACD إيجابي"] },
-    forex: { symbol: "FX:EURUSD", news: ["اليورو يتماسك أمام الدولار.", "ترقب بيانات التضخم الأوروبية."], tips: ["EMA 200 هو دعمك", "ATR مرتفع"] },
-    gold: { symbol: "OANDA:XAUUSD", news: ["الذهب يختبر مناطق مقاومة تاريخية.", "طلب بنكي مركزي متزايد."], tips: ["Fibonacci 0.618 مهم", "ملاذ آمن قوي"] }
-};
-
 let currentWidget = null;
 
-// التنبيهات الصوتية الذكية (للمستويات المهمة)
-function triggerAudioAlert(color) {
+const MARKET_CONFIG = {
+    crypto: { symbol: "BINANCE:BTCUSDT", news: ["مؤسسات بنكية كبرى تزيد حيازتها من البيتكوين.", "توقعات باستمرار الزخم الصاعد نتيجة تقليص العرض."], tips: ["استخدم RSI لتحديد مناطق التشبع فوق 70", "راقب تقاطع MACD على فريم 4 ساعات"] },
+    forex: { symbol: "FX:EURUSD", news: ["ترقب بيانات التضخم الأوروبية غداً.", "المركزي الأمريكي يلمح لتثبيت الفائدة."], tips: ["مستوى 1.0850 منطقة دعم قوية", "تجنب التداول وقت صدور الأخبار"] },
+    gold: { symbol: "OANDA:XAUUSD", news: ["الذهب يرتفع كملاذ آمن وسط التوترات السياسية.", "توقعات بوصول الأونصة لمستويات قياسية جديدة."], tips: ["فعل Bollinger Bands لمراقبة الانفجار السعري", "مستوى 2050 هو مفتاح الصعود القادم"] }
+};
+
+// وظيفة إصدار التنبيه الصوتي
+function playAlert(type) {
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     const osc = audioCtx.createOscillator();
     const gain = audioCtx.createGain();
     osc.connect(gain); gain.connect(audioCtx.destination);
-    
-    osc.frequency.value = (color === 'green') ? 880 : 440; // نغمة حادة للأخضر، هادئة للأصفر
+    osc.frequency.value = (type === 'buy') ? 880 : 440; // نغمة حادة للشراء، منخفضة للبيع
     osc.start();
     gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 1);
     osc.stop(audioCtx.currentTime + 1);
 }
 
-function updateTerminal(mode) {
-    const data = BODA_AI_CONFIG[mode];
-    
-    // 1. الشارت (Autosize)
-    if (currentWidget) document.getElementById('main-tradingview-chart').innerHTML = '';
+function createWidget(symbol) {
+    if (currentWidget) document.getElementById('tradingview_widget').innerHTML = '';
     currentWidget = new TradingView.widget({
-        "autosize": true, "symbol": data.symbol, "interval": "60", "theme": "dark",
-        "style": "1", "locale": "ar", "container_id": "main-tradingview-chart", "hide_side_toolbar": false
+        "autosize": true, // يضمن تمدد الشارت ليشغل المساحة الضخمة الجديدة
+        "symbol": symbol, "interval": "60", "theme": "dark", "style": "1", "locale": "ar",
+        "container_id": "tradingview_widget", "hide_side_toolbar": false, "allow_symbol_change": true
     });
+    updateSecondaryWidgets(symbol);
+}
 
-    // 2. التحليل الفني
-    const techBox = document.getElementById('tech-analysis-widget');
+function updateSecondaryWidgets(symbol) {
+    // تحديث الملخص الفني
+    const techBox = document.getElementById('tv-tech-summary');
     techBox.innerHTML = '';
     const script = document.createElement('script');
     script.src = "https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js";
-    script.innerHTML = JSON.stringify({ "interval": "1h", "width": "100%", "isTransparent": true, "height": "100%", "symbol": data.symbol, "locale": "ar", "colorTheme": "dark" });
+    script.innerHTML = JSON.stringify({ "interval": "1h", "width": "100%", "isTransparent": true, "height": "100%", "symbol": symbol, "locale": "ar", "colorTheme": "dark" });
     techBox.appendChild(script);
-
-    // 3. المحتوى
-    document.getElementById('ai-news-content').innerHTML = data.news.map(n => `<div style="margin-bottom:8px;">• ${n}</div>`).join('');
-    document.getElementById('ai-tips-list').innerHTML = data.tips.map(t => `<li>${t}</li>`).join('');
-
-    processAIAnalytics();
+    
+    simulateAI(symbol);
 }
 
-function processAIAnalytics() {
-    const needle = document.getElementById('needle');
-    const signalTxt = document.getElementById('signal-text');
+function simulateAI(symbol) {
+    const mode = document.querySelector('.nav-item.active').dataset.type;
+    const data = MARKET_CONFIG[mode];
+    
+    // تحديث النصوص
+    document.getElementById('ai-news-feed').innerHTML = data.news.map(n => `<div style="margin-bottom:8px; border-right:2px solid var(--gold); padding-right:8px;">${n}</div>`).join('');
+    document.getElementById('indicator-tips').innerHTML = data.tips.map(t => `<li><i class="fas fa-check-circle"></i> ${t}</li>`).join('');
+    
+    // محاكاة الإشارة
     const val = Math.random();
-
-    if (val > 0.6) {
-        needle.style.transform = `rotate(${val * 120}deg)`;
-        signalTxt.innerText = "صعود قوي / BUY";
-        signalTxt.style.color = "var(--green)";
-        triggerAudioAlert('green');
-    } else if (val > 0.3) {
-        needle.style.transform = `rotate(${val * 90}deg)`;
-        signalTxt.innerText = "تنبيه / WARNING";
-        signalTxt.style.color = "#f1c40f"; // أصفر
-        triggerAudioAlert('yellow');
+    const ptr = document.getElementById('gauge-ptr');
+    const result = document.getElementById('ai-signal-result');
+    
+    if (val > 0.5) {
+        ptr.style.transform = `rotate(0.4turn)`;
+        result.innerText = "صاعد / STRONG BUY"; result.style.color = "var(--green)";
+        playAlert('buy');
     } else {
-        needle.style.transform = `rotate(0deg)`;
-        signalTxt.innerText = "هبوط / SELL";
-        signalTxt.style.color = "var(--red)";
+        ptr.style.transform = `rotate(0.1turn)`;
+        result.innerText = "هابط / STRONG SELL"; result.style.color = "var(--red)";
+        playAlert('sell');
     }
+    document.getElementById('trend-val').innerText = Math.floor(Math.random() * 20 + 75) + "%";
 }
 
-// تشغيل الويدجت الثابتة
-function initStatic() {
-    const ticker = document.createElement('script');
-    ticker.src = "https://s3.tradingview.com/external-embedding/embed-widget-tickers.js";
-    ticker.innerHTML = JSON.stringify({ "symbols": [{"proName": "BINANCE:BTCUSDT"}, {"proName": "FX:EURUSD"}, {"proName": "OANDA:XAUUSD"}], "colorTheme": "dark", "isTransparent": true, "locale": "ar" });
-    document.getElementById('tv-ticker-widget').appendChild(ticker);
-
-    const news = document.createElement('script');
-    news.src = "https://s3.tradingview.com/external-embedding/embed-widget-timeline.js";
-    news.innerHTML = JSON.stringify({ "feedMode": "all_symbols", "colorTheme": "dark", "width": "100%", "height": "100%", "locale": "ar" });
-    document.getElementById('global-news').appendChild(news);
-}
-
-document.querySelectorAll('.nav-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        updateTerminal(btn.dataset.type);
+document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+        this.classList.add('active');
+        createWidget(this.dataset.symbol);
     });
 });
 
-window.onload = () => { initStatic(); updateTerminal('crypto'); };
+window.onload = () => {
+    createWidget("BINANCE:BTCUSDT");
+    const newsScript = document.createElement('script');
+    newsScript.src = "https://s3.tradingview.com/external-embedding/embed-widget-timeline.js";
+    newsScript.innerHTML = JSON.stringify({ "feedMode": "all_symbols", "colorTheme": "dark", "width": "100%", "height": "100%", "locale": "ar" });
+    document.getElementById('tv-news-timeline').appendChild(newsScript);
+};
