@@ -1,32 +1,27 @@
-/* تصميم علب تحليل الذكاء الاصطناعي */
-.ai-box {
-    background: linear-gradient(145deg, #1a202c, #151a27);
-    border-left: 5px solid var(--gold);
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+/* نظام الخانات (Tabs) */
+.tab-content {
+    display: none; /* إخفاء كل الخانات افتراضياً */
+    animation: fadeIn 0.5s ease-in-out;
 }
 
-.asset-tag {
-    background: var(--gold);
-    color: #000;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: bold;
+.active-tab {
+    display: block; /* إظهار الخانة النشطة فقط */
 }
 
-.source-tag {
-    float: left;
-    color: #666;
-    font-size: 12px;
+/* تنسيق الشبكة داخل كل خانة */
+.grid-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* الشارت يأخذ مساحة أكبر من الأخبار */
+    gap: 20px;
 }
 
-.positive { border-left-color: #00ff88; box-shadow: 0 0 10px rgba(0, 255, 136, 0.1); }
-.negative { border-left-color: #ff3366; box-shadow: 0 0 10px rgba(255, 51, 102, 0.1); }
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
-/* تحسين السكرول بار */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: var(--bg-dark); }
-::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
+/* استجابة الشاشات الصغيرة (الموبايل) */
+@media (max-width: 1024px) {
+    .grid-layout { grid-template-columns: 1fr; }
+    nav ul { gap: 10px; font-size: 14px; }
+}
