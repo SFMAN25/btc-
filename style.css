@@ -1,61 +1,51 @@
 :root {
-    --bg: #05060a;
-    --card: #0c0e14;
-    --gold: #f0b90b;
-    --green: #0ecb81;
-    --red: #f6465d;
-    --border: #1e222d;
-    --text: #d1d4dc;
+    --bg: #05060a; --card: #0c0e14; --gold: #f0b90b; --green: #0ecb81; --red: #f6465d; --border: #1e222d;
 }
 
 body {
-    background-color: var(--bg); color: var(--text);
-    margin: 0; font-family: 'Cairo', sans-serif; overflow: hidden;
+    background: var(--bg); color: #d1d4dc; margin: 0; font-family: 'Cairo', sans-serif; height: 100vh; overflow: hidden;
 }
 
 .header {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 8px 20px; background: var(--card); border-bottom: 1px solid var(--border);
+    height: 50px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px;
+    background: var(--card); border-bottom: 1px solid var(--border);
 }
 
 .logo span { color: var(--gold); font-weight: 900; }
 
-.nav-links a {
-    color: #848e9c; text-decoration: none; margin: 0 10px; font-weight: bold; font-size: 13px;
-}
-.nav-links a.active { color: var(--gold); border-bottom: 2px solid var(--gold); }
-
-/* توزيع الشاشة المطور لتكبير الشارت */
 .dashboard-grid {
-    display: grid; 
-    grid-template-columns: 220px 1fr 240px; /* تقليص القوائم الجانبية */
-    gap: 8px; padding: 8px; height: calc(100vh - 60px);
+    display: grid; grid-template-columns: 240px 1fr 240px; gap: 8px; padding: 8px;
+    height: calc(100vh - 50px); /* يملأ كامل ما تبقى من الشاشة */
 }
 
 .col-main { display: flex; flex-direction: column; gap: 8px; }
 
-/* جعل الشارت يحتل المساحة العظمى */
-.chart-container { 
-    flex: 4; /* أولوية الارتفاع للشارت */
-    min-height: 500px; padding: 0 !important; border-radius: 4px; overflow: hidden;
-}
+/* تكبير الشارت ليشغل 70% من المركز */
+.chart-container { flex: 7; padding: 0 !important; overflow: hidden; border: 1px solid var(--border); }
+#tradingview_widget { height: 100%; width: 100%; }
 
-.bottom-tools { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; flex: 1.5; }
+/* منطقة الأدوات السفلية (30% من المركز) */
+.bottom-row { flex: 3; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 
-.card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; display: flex; flex-direction: column; }
-.card-header { font-size: 11px; color: var(--gold); padding: 8px; background: #131722; border-bottom: 1px solid var(--border); font-weight: bold; }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; display: flex; flex-direction: column; overflow: hidden; }
+.card-header { font-size: 11px; color: var(--gold); padding: 8px; background: #131722; font-weight: bold; border-bottom: 1px solid var(--border); }
+
+.widget-container { flex: 1; height: 100%; }
+.scroll-content { flex: 1; padding: 10px; font-size: 12px; overflow-y: auto; line-height: 1.6; }
 
 /* العداد */
-.gauge-section { padding: 15px 10px; text-align: center; }
-.gauge-container { position: relative; width: 140px; height: 70px; margin: 0 auto; overflow: hidden; }
-.gauge-body { width: 140px; height: 140px; background: #1e222d; border-radius: 50%; position: relative; }
+.gauge-box { padding: 10px; text-align: center; }
+.gauge-wrap { position: relative; width: 120px; height: 60px; margin: 0 auto; overflow: hidden; }
+.gauge-body { width: 120px; height: 120px; background: #1e222d; border-radius: 50%; position: relative; }
 .gauge-fill {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     background: conic-gradient(from 270deg, var(--red) 0%, #f1c40f 50%, var(--green) 100%);
-    transform-origin: center; transform: rotate(0.1turn); transition: 1.5s;
+    transform-origin: center; transition: 1.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.gauge-cover { width: 110px; height: 110px; background: var(--card); border-radius: 50%; position: absolute; bottom: 0; left: 15px; }
+.gauge-cover { width: 90px; height: 90px; background: var(--card); border-radius: 50%; position: absolute; bottom: 0; left: 15px; }
 
-.signal-text { font-size: 16px; font-weight: 900; margin-top: 10px; }
-.scroll-content { padding: 10px; font-size: 12px; overflow-y: auto; color: #b7bdc6; }
-.social-btn { color: #fff; margin-left: 10px; font-size: 18px; }
+.signal-text { font-size: 14px; font-weight: 900; margin-top: 8px; }
+.full-h { height: 100%; }
+.flex-grow { flex: 1; }
+.social-icon { color: #fff; margin-left: 12px; font-size: 16px; transition: 0.3s; }
+.social-icon:hover { color: var(--gold); }
