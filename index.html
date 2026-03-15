@@ -1,71 +1,26 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BODA | Financial Intelligence</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body>
+<main class="dashboard">
+    <section class="widget chart-widget">
+        <h2><i class="fas fa-chart-line"></i> التحليل المباشر (الذهب/البيتكوين)</h2>
+        <div id="tradingview_chart"></div>
+    </section>
 
-    <div class="ticker-wrap">
-        <div class="ticker">
-            <span class="up">BTC/USD $64,200 ▲</span>
-            <span class="down">ETH/USD $3,400 ▼</span>
-            <span class="up">GOLD $2,150 ▲</span>
-            <span class="down">EUR/USD 1.0850 ▼</span>
+    <section class="widget news-widget">
+        <h2><i class="fas fa-newspaper"></i> أخبار Investing.com (فوركس ودهب)</h2>
+        <iframe src="https://sslecal2.investing.com?columns=exc_flags,exc_actual,exc_forecast,exc_previous&category=_forex, _gold&importance=2,3&features=datepicker,timezone&countries=5,25,32,37,72,22,17,4,26,10,11,43,20,38,110,11,12&calType=day&timeZone=15&lang=18" width="100%" height="400" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0"></iframe>
+    </section>
+
+    <section class="widget x-widget">
+        <h2><i class="fab fa-x-twitter"></i> توصيات الخبراء (Live X)</h2>
+        <div class="x-container" style="height: 500px; overflow-y: scroll;">
+            <a class="twitter-timeline" data-theme="dark" href="https://twitter.com/EATrading0?ref_src=twsrc%5Etfw">Tweets by EATrading0</a> 
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
-    </div>
+    </section>
 
-    <header>
-        <div class="logo">
-            <h1>BODA <span>AI-Trade</span></h1>
+    <section class="widget ai-engine">
+        <h2><i class="fas fa-brain"></i> محلل Boda الذكي (AI)</h2>
+        <div id="ai-analysis-container">
+            <div class="ai-signal loading">جاري تحليل بيانات السوق الحالية...</div>
         </div>
-        <nav>
-            <ul>
-                <li><a href="#" class="active">الرئيسية</a></li>
-                <li><a href="#">الكريبتو</a></li>
-                <li><a href="#">الفوركس</a></li>
-                <li><a href="#">الذهب</a></li>
-            </ul>
-        </nav>
-        <a href="https://www.tiktok.com/@bo_da.0" target="_blank" class="tiktok-btn">
-            <i class="fab fa-tiktok"></i> تابعني على تيك توك
-        </a>
-    </header>
-
-    <main class="dashboard">
-        
-        <section class="widget chart-widget">
-            <h2><i class="fas fa-chart-line"></i> التحليل الفني المباشر</h2>
-            <div id="tradingview_chart" style="height: 400px;"></div>
-        </section>
-
-        <section class="widget ai-news-widget">
-            <h2><i class="fas fa-robot"></i> رادار الذكاء الاصطناعي</h2>
-            <div id="ai-news-feed" class="news-feed">
-                </div>
-        </section>
-
-        <section class="widget twitter-widget">
-            <h2><i class="fab fa-x-twitter"></i> نبض المحللين</h2>
-            <div class="tweet-box">
-                <p class="tweet-author">@EATrading0</p>
-                <p>السيولة تتجه نحو البيتكوين، كسر مستوى 65k سيعني انطلاقة قوية.</p>
-                <span class="tweet-time">قبل 15 دقيقة</span>
-            </div>
-             <div class="tweet-box">
-                <p class="tweet-author">@Boda_Analytics</p>
-                <p>مراقبة بيانات التضخم الأمريكية اليوم، تأثير مباشر متوقع على الذهب والدولار.</p>
-                <span class="tweet-time">قبل ساعة</span>
-            </div>
-        </section>
-
-    </main>
-
-    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-    <script src="script.js"></script>
-</body>
-</html>
+    </section>
+</main>
