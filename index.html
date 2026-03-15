@@ -3,105 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BODA | Financial Intelligence</title>
+    <title>BODA AI-Trade | منصة التحليل الذكي</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
-<body>
+<body class="dark-theme">
 
-    <div class="ticker-wrap">
-        <div class="ticker">
-            <span class="up">BTC/USD $64,200 ▲</span>
-            <span class="down">ETH/USD $3,400 ▼</span>
-            <span class="up">GOLD $2,150 ▲</span>
-            <span class="down">EUR/USD 1.0850 ▼</span>
-        </div>
-    </div>
-
-    <header>
-        <div class="logo">
-            <h1>BODA <span>AI-Trade</span></h1>
-        </div>
-        <nav>
-            <ul id="nav-links">
-                <li><a href="#" data-target="home" class="active">الرئيسية</a></li>
-                <li><a href="#" data-target="crypto">الكريبتو</a></li>
-                <li><a href="#" data-target="forex">الفوركس</a></li>
-                <li><a href="#" data-target="gold">الذهب</a></li>
-            </ul>
+    <header class="main-header">
+        <div class="logo">BODA <span>AI-Trade</span></div>
+        <nav class="nav-bar">
+            <a href="#" class="nav-item active" data-market="BTCUSDT">الرئيسية</a>
+            <a href="#" class="nav-item" data-market="BINANCE:BTCUSDT">الكريبتو</a>
+            <a href="#" class="nav-item" data-market="FX:EURUSD">الفوركس</a>
+            <a href="#" class="nav-item" data-market="OANDA:XAUUSD">الذهب</a>
         </nav>
-        <a href="https://www.tiktok.com/@bo_da.0" target="_blank" class="tiktok-btn">
-            <i class="fab fa-tiktok"></i> تيك توك
-        </a>
+        <div class="user-profile">
+            <a href="https://www.tiktok.com/@bo_da.0" target="_blank" class="tiktok-link">@bo_da.0 <i class="fab fa-tiktok"></i></a>
+        </div>
     </header>
 
-    <main class="dashboard">
-        
-        <div id="home" class="tab-content active-tab">
-            <div class="grid-layout">
-                <section class="widget chart-widget">
-                    <h2><i class="fas fa-globe"></i> نظرة عامة على الأسواق</h2>
-                    <div id="tv_home" style="height: 400px;"></div>
-                </section>
-                <section class="widget x-widget">
-                    <h2><i class="fab fa-x-twitter"></i> نبض X المباشر</h2>
-                    <div style="height: 400px; overflow-y: scroll;">
-                        <a class="twitter-timeline" data-theme="dark" href="https://twitter.com/EATrading0?ref_src=twsrc%5Etfw">Tweets by EATrading0</a> 
-                        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <div class="container">
+        <div class="top-row">
+            <div class="card ai-gauge-card">
+                <h3>النتيجة النهائية - AI Signal</h3>
+                <div class="gauge-container">
+                    <div class="gauge-body">
+                        <div class="gauge-fill" id="gauge-ptr"></div>
+                        <div class="gauge-cover"></div>
                     </div>
-                </section>
+                    <div class="gauge-value" id="ai-result">تحليل...</div>
+                </div>
+                <p id="ai-status-text">ثقة الذكاء الاصطناعي: 85%</p>
+            </div>
+
+            <div class="card technical-analysis">
+                <div class="tradingview-widget-container">
+                    <div class="tradingview-widget-container__widget"></div>
+                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>
+                    {
+                        "interval": "1h",
+                        "width": "100%",
+                        "isTransparent": true,
+                        "height": "100%",
+                        "symbol": "BINANCE:BTCUSDT",
+                        "showIntervalTabs": true,
+                        "displayMode": "single",
+                        "locale": "ar",
+                        "colorTheme": "dark"
+                    }
+                    </script>
+                </div>
             </div>
         </div>
 
-        <div id="crypto" class="tab-content hidden">
-            <div class="grid-layout">
-                <section class="widget chart-widget">
-                    <h2><i class="fab fa-bitcoin"></i> شارت البيتكوين المباشر</h2>
-                    <div id="tv_crypto" style="height: 400px;"></div>
-                </section>
-                <section class="widget ai-engine">
-                    <h2><i class="fas fa-brain"></i> تحليل AI للكريبتو</h2>
-                    <div class="ai-box positive">
-                        <h3>اختراق سيولة البيتكوين</h3>
-                        <p class="ai-impact">إشارة: صعود 🟢</p>
-                        <p class="ai-analysis">السيولة تتجه لـ BTC، مؤشرات الزخم تدعم استمرار الصعود لمناطق المقاومة القادمة.</p>
-                    </div>
-                </section>
+        <div class="main-grid">
+            <div class="card chart-main">
+                <div id="tradingview_boda"></div>
+            </div>
+
+            <div class="card news-card">
+                <h3>أخبار Investing.com المباشرة</h3>
+                <iframe src="https://sslecal2.investing.com?columns=exc_flags,exc_actual,exc_forecast,exc_previous&importance=2,3&features=datepicker,timezone&countries=5,25,32,37,72,22,17,4,26,10,11,43,20,38,110,11,12&calType=day&timeZone=15&lang=18" width="100%" height="100%" frameborder="0" allowtransparency="true"></iframe>
+            </div>
+
+            <div class="card x-card">
+                <h3>نبض X المباشر</h3>
+                <div class="x-scroll">
+                    <a class="twitter-timeline" data-theme="dark" href="https://twitter.com/EATrading0">Tweets by EATrading0</a> 
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                </div>
             </div>
         </div>
-
-        <div id="forex" class="tab-content hidden">
-            <div class="grid-layout">
-                <section class="widget chart-widget">
-                    <h2><i class="fas fa-euro-sign"></i> شارت الفوركس (EUR/USD)</h2>
-                    <div id="tv_forex" style="height: 400px;"></div>
-                </section>
-                <section class="widget news-widget">
-                    <h2><i class="fas fa-newspaper"></i> أخبار فوركس (Investing.com)</h2>
-                    <iframe src="https://sa.investing.com/news/forex-news" width="100%" height="400" frameborder="0" style="border-radius: 8px;"></iframe>
-                </section>
-            </div>
-        </div>
-
-        <div id="gold" class="tab-content hidden">
-            <div class="grid-layout">
-                <section class="widget chart-widget">
-                    <h2><i class="fas fa-coins"></i> شارت الذهب (XAU/USD)</h2>
-                    <div id="tv_gold" style="height: 400px;"></div>
-                </section>
-                <section class="widget ai-engine">
-                    <h2><i class="fas fa-robot"></i> تحليل AI للذهب</h2>
-                    <div class="ai-box negative">
-                        <h3>قوة الدولار تضغط على الذهب</h3>
-                        <p class="ai-impact">إشارة: هبوط 🔴</p>
-                        <p class="ai-analysis">بيانات التضخم الأمريكية جاءت أعلى من المتوقع، مما يعزز الدولار ويشكل ضغطاً سلبياً على أسعار الذهب لحظياً.</p>
-                    </div>
-                </section>
-            </div>
-        </div>
-
-    </main>
+    </div>
 
     <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
     <script src="script.js"></script>
