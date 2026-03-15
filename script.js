@@ -1,48 +1,32 @@
-// 1. تشغيل شارت TradingView
-new TradingView.widget({
-    "autosize": true,
-    "symbol": "BINANCE:BTCUSDT",
-    "interval": "D",
-    "timezone": "Etc/UTC",
-    "theme": "dark",
-    "style": "1",
-    "locale": "ar_AE",
-    "enable_publishing": false,
-    "backgroundColor": "#151a27",
-    "gridColor": "rgba(255, 255, 255, 0.06)",
-    "hide_top_toolbar": false,
-    "hide_legend": false,
-    "save_image": false,
-    "container_id": "tradingview_chart"
-});
-
-// 2. محاكاة نظام الذكاء الاصطناعي للأخبار
-const aiNewsData = [
-    {
-        title: "الفيدرالي الأمريكي يلمح لخفض أسعار الفائدة قريباً.",
-        impact: "إيجابي 🟢",
-        type: "positive",
-        analysis: "الذكاء الاصطناعي: خفض الفائدة يضعف الدولار، مما يعطي دفعة قوية لصعود الذهب والبيتكوين على المدى القصير."
-    },
-    {
-        title: "منصة تداول كبرى تواجه مشاكل في سحب العملات.",
-        impact: "سلبي 🔴",
-        type: "negative",
-        analysis: "الذكاء الاصطناعي: خبر سلبي يخلق حالة من الخوف (FUD) في السوق، متوقع هبوط طفيف للبيتكوين نحو الدعم."
-    }
+// مصفوفة لمحاكاة جلب الأخبار من Investing و X وتحليلها
+const marketSignals = [
+    { source: "Investing", asset: "XAU/USD (الذهب)", news: "ارتفاع التضخم الأمريكي بشكل غير متوقع", sentiment: "Bullish", ai_advice: "الذكاء الاصطناعي يتوقع ضغط شرائي على الذهب كملاذ آمن. الهدف القادم 2180." },
+    { source: "X (EAtrading)", asset: "BTC/USDT", news: "اختراق منطقة سيولة 64,500", sentiment: "Bullish", ai_advice: "التحليل الفني يدعم الاستمرار. الذكاء الاصطناعي يرجح صعود للـ 67k." },
+    { source: "Investing", asset: "EUR/USD", news: "بيانات سلبية من المركزي الأوروبي", sentiment: "Bearish", ai_advice: "توقعات بهبوط الزوج. يفضل البحث عن فرص بيع." }
 ];
 
-const newsFeedContainer = document.getElementById('ai-news-feed');
+function updateAISignals() {
+    const container = document.getElementById('ai-analysis-container');
+    container.innerHTML = ''; // مسح المحتوى القديم
 
-aiNewsData.forEach(news => {
-    const aiBox = document.createElement('div');
-    aiBox.className = `ai-box ${news.type}`;
-    
-    aiBox.innerHTML = `
-        <h3>${news.title}</h3>
-        <p class="ai-impact">التأثير المتوقع: ${news.impact}</p>
-        <p class="ai-analysis">${news.analysis}</p>
-    `;
-    
-    newsFeedContainer.appendChild(aiBox);
-});
+    marketSignals.forEach(sig => {
+        const signalDiv = document.createElement('div');
+        signalDiv.className = `ai-box ${sig.sentiment === 'Bullish' ? 'positive' : 'negative'}`;
+        
+        signalDiv.innerHTML = `
+            <div class="sig-header">
+                <span class="asset-tag">${sig.asset}</span>
+                <span class="source-tag">${sig.source}</span>
+            </div>
+            <h3>${sig.news}</h3>
+            <p class="ai-impact">إشارة AI: <strong>${sig.sentiment === 'Bullish' ? 'صعود 🟢' : 'هبوط 🔴'}</strong></p>
+            <p class="ai-analysis">${sig.ai_advice}</p>
+        `;
+        container.appendChild(signalDiv);
+    });
+}
+
+// تشغيل التحديث عند التحميل
+window.onload = () => {
+    updateAISignals();
+};
