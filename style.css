@@ -1,46 +1,47 @@
-/* حافظ على المتغيرات الموجودة لديك [cite: 67, 68, 69] */
 :root {
     --bg-main: #0b0e11;
     --bg-card: #181a20;
     --gold: #FCD535;
     --green: #0ecb81;
     --red: #f6465d;
-    --text-main: #EAECEF;
     --border: #2b3139;
 }
 
-/* تعديل الهيكل ليكون متجاوباً مع العناصر الجديدة */
+body { background-color: var(--bg-main); color: #EAECEF; margin: 0; font-family: 'Cairo', sans-serif; overflow: hidden; }
+
 .dashboard-grid {
     display: grid;
     grid-template-columns: 300px 1fr 320px; 
     gap: 15px;
     padding: 15px;
-    height: calc(100vh - 80px); /* تقليل الارتفاع للسماح بالهيدر [cite: 76] */
+    height: calc(100vh - 80px);
 }
 
+/* أهم تعديل للعمود الأوسط */
 .col-center {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    overflow-y: auto; /* هذا يسمح برؤية المؤشرات والأخبار تحت الشارت [cite: 77] */
+    overflow-y: auto; /* يسمح بالتمرير لرؤية المؤشرات تحت الشارت */
     padding-right: 5px;
 }
 
 .chart-card {
-    min-height: 500px; /* حجم الشارت الكبير [cite: 91] */
+    min-height: 550px; /* إعادة حجم الشارت للضخامة */
     flex-shrink: 0;
 }
 
-.ai-news-card, .technical-summary-center {
+.insight-card, .tech-summary-card {
     min-height: 250px;
     flex-shrink: 0;
 }
 
-/* تنسيق خبر البنوك */
-.bank-news-item {
-    background: #1e222d;
-    padding: 10px;
-    border-radius: 6px;
-    margin-bottom: 8px;
-    border-right: 4px solid var(--gold);
-}
+.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 15px; }
+.card-header { color: var(--gold); font-weight: 700; border-bottom: 1px solid var(--border); margin-bottom: 10px; padding-bottom: 5px; }
+
+/* تنسيق أخبار البنوك */
+.bank-news-item { background: #1e222d; padding: 10px; border-radius: 6px; margin-bottom: 8px; border-right: 4px solid var(--gold); font-size: 13px; }
+
+/* شريط التمرير */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
