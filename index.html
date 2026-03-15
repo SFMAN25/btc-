@@ -3,79 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BODA AI-Trade | منصة التحليل الذكي</title>
+    <title>BODA AI-Trade | Premium Dashboard</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="dark-theme">
+<body>
 
-    <header class="main-header">
+    <header class="header">
         <div class="logo">BODA <span>AI-Trade</span></div>
-        <nav class="nav-bar">
-            <a href="#" class="nav-item active" data-market="BTCUSDT">الرئيسية</a>
-            <a href="#" class="nav-item" data-market="BINANCE:BTCUSDT">الكريبتو</a>
-            <a href="#" class="nav-item" data-market="FX:EURUSD">الفوركس</a>
-            <a href="#" class="nav-item" data-market="OANDA:XAUUSD">الذهب</a>
+        <nav class="nav-links">
+            <a href="#" class="active">الرئيسية</a>
+            <a href="#">الكريبتو</a>
+            <a href="#">الفوركس</a>
+            <a href="#">الذهب</a>
         </nav>
-        <div class="user-profile">
-            <a href="https://www.tiktok.com/@bo_da.0" target="_blank" class="tiktok-link">@bo_da.0 <i class="fab fa-tiktok"></i></a>
-        </div>
+        <a href="https://www.tiktok.com/@bo_da.0" target="_blank" class="tiktok"><i class="fab fa-tiktok"></i> @bo_da.0</a>
     </header>
 
-    <div class="container">
-        <div class="top-row">
-            <div class="card ai-gauge-card">
-                <h3>النتيجة النهائية - AI Signal</h3>
-                <div class="gauge-container">
-                    <div class="gauge-body">
-                        <div class="gauge-fill" id="gauge-ptr"></div>
-                        <div class="gauge-cover"></div>
-                    </div>
-                    <div class="gauge-value" id="ai-result">تحليل...</div>
-                </div>
-                <p id="ai-status-text">ثقة الذكاء الاصطناعي: 85%</p>
-            </div>
-
-            <div class="card technical-analysis">
-                <div class="tradingview-widget-container">
-                    <div class="tradingview-widget-container__widget"></div>
-                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>
-                    {
-                        "interval": "1h",
-                        "width": "100%",
-                        "isTransparent": true,
-                        "height": "100%",
-                        "symbol": "BINANCE:BTCUSDT",
-                        "showIntervalTabs": true,
-                        "displayMode": "single",
-                        "locale": "ar",
-                        "colorTheme": "dark"
-                    }
-                    </script>
-                </div>
-            </div>
+    <div class="ticker-container">
+        <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+            {
+            "symbols": [
+                {"proName": "BINANCE:BTCUSDT", "title": "Bitcoin"},
+                {"proName": "BINANCE:ETHUSDT", "title": "Ethereum"},
+                {"proName": "FX:EURUSD", "title": "EUR/USD"},
+                {"proName": "OANDA:XAUUSD", "title": "Gold"}
+            ],
+            "showSymbolLogo": true,
+            "colorTheme": "dark",
+            "isTransparent": false,
+            "displayMode": "adaptive",
+            "locale": "ar_AE"
+            }
+            </script>
         </div>
+    </div>
 
-        <div class="main-grid">
-            <div class="card chart-main">
-                <div id="tradingview_boda"></div>
+    <main class="dashboard-grid">
+        
+        <div class="col-left">
+            <div class="card ai-card">
+                <div class="card-header"><i class="fas fa-microchip"></i> النتيجة النهائية - AI Signal</div>
+                
+                <div class="timeframes">
+                    <button class="tf-btn" data-tf="5m">5 د</button>
+                    <button class="tf-btn" data-tf="15m">15 د</button>
+                    <button class="tf-btn active" data-tf="1H">1 س</button>
+                    <button class="tf-btn" data-tf="4H">4 س</button>
+                    <button class="tf-btn" data-tf="1D">يومي</button>
+                </div>
+
+                <div class="gauge-box">
+                    <div class="gauge">
+                        <div class="gauge-bg"></div>
+                        <div class="gauge-fill" id="gauge-fill"></div>
+                        <div class="gauge-cover"></div>
+                        <div class="gauge-needle" id="gauge-needle"></div>
+                    </div>
+                    <div class="ai-result-text" id="ai-text">صاعد / Bullish</div>
+                    <div class="ai-confidence">ثقة الذكاء الاصطناعي: <span id="ai-percent">85%</span></div>
+                </div>
             </div>
 
             <div class="card news-card">
-                <h3>أخبار Investing.com المباشرة</h3>
-                <iframe src="https://sslecal2.investing.com?columns=exc_flags,exc_actual,exc_forecast,exc_previous&importance=2,3&features=datepicker,timezone&countries=5,25,32,37,72,22,17,4,26,10,11,43,20,38,110,11,12&calType=day&timeZone=15&lang=18" width="100%" height="100%" frameborder="0" allowtransparency="true"></iframe>
+                <div class="card-header"><i class="fas fa-newspaper"></i> آخر أخبار Investing</div>
+                <iframe src="https://sslecal2.investing.com?columns=exc_flags,exc_actual,exc_forecast,exc_previous&importance=2,3&features=datepicker,timezone&calType=day&timeZone=15&lang=18" width="100%" height="280" frameborder="0"></iframe>
+            </div>
+        </div>
+
+        <div class="col-center">
+            <div class="card chart-card">
+                <div id="tv_main_chart" style="height: 100%; width: 100%;"></div>
             </div>
 
-            <div class="card x-card">
-                <h3>نبض X المباشر</h3>
-                <div class="x-scroll">
-                    <a class="twitter-timeline" data-theme="dark" href="https://twitter.com/EATrading0">Tweets by EATrading0</a> 
+            <div class="card twitter-card">
+                <div class="card-header"><i class="fab fa-x-twitter"></i> نبض السوق المباشر (X)</div>
+                <div class="twitter-wrap">
+                    <a class="twitter-timeline" data-theme="dark" data-height="250" href="https://twitter.com/CoinDesk?ref_src=twsrc%5Etfw">أخبار الكريبتو العالمية</a> 
                     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                 </div>
             </div>
         </div>
-    </div>
+
+        <div class="col-right">
+            <div class="card tech-card">
+                <div class="card-header"><i class="fas fa-chart-pie"></i> Technical Analysis</div>
+                <div class="tradingview-widget-container" style="height: 400px;">
+                    <div class="tradingview-widget-container__widget"></div>
+                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>
+                    {
+                    "interval": "1h",
+                    "width": "100%",
+                    "isTransparent": true,
+                    "height": "100%",
+                    "symbol": "BINANCE:BTCUSDT",
+                    "showIntervalTabs": true,
+                    "displayMode": "multiple",
+                    "locale": "ar_AE",
+                    "colorTheme": "dark"
+                    }
+                    </script>
+                </div>
+            </div>
+
+            <div class="card alerts-card">
+                <div class="card-header"><i class="fas fa-bell"></i> Opportunity Alerts</div>
+                <div class="alerts-grid">
+                    <div class="alert-box gold">
+                        <i class="fab fa-bitcoin"></i>
+                        <span>BTC/USDT</span>
+                        <small>Strong Buy</small>
+                    </div>
+                    <div class="alert-box silver">
+                        <i class="fab fa-ethereum"></i>
+                        <span>ETH/USDT</span>
+                        <small>Buy</small>
+                    </div>
+                    <div class="alert-box bronze">
+                        <i class="fas fa-coins"></i>
+                        <span>XAU/USD</span>
+                        <small>Sell</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
 
     <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
     <script src="script.js"></script>
