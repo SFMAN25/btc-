@@ -1,128 +1,32 @@
-:root {
-    --bg-dark: #0a0e17; /* لون الخلفية الرئيسي */
-    --panel-bg: #151a27; /* لون البطاقات */
-    --gold: #d4af37; /* لون ذهبي فخم */
-    --text-light: #e0e6ed;
-    --up-color: #00ff88; /* لون الصعود */
-    --down-color: #ff3366; /* لون الهبوط */
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Cairo', sans-serif;
-}
-
-body {
-    background-color: var(--bg-dark);
-    color: var(--text-light);
-}
-
-/* Ticker Style */
-.ticker-wrap {
-    background: #000;
-    width: 100%;
-    overflow: hidden;
-    height: 30px;
-    padding-left: 100%;
-    box-sizing: content-box;
-}
-.ticker {
-    display: inline-block;
-    height: 30px;
-    line-height: 30px;
-    white-space: nowrap;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-    animation-name: ticker;
-    animation-duration: 30s;
-}
-.ticker span { margin-right: 2rem; font-weight: bold; }
-.up { color: var(--up-color); }
-.down { color: var(--down-color); }
-
-@keyframes ticker {
-    0% { transform: translate3d(0, 0, 0); }
-    100% { transform: translate3d(-100%, 0, 0); }
-}
-
-/* Header */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 5%;
-    background: var(--panel-bg);
-    border-bottom: 2px solid var(--gold);
-}
-.logo h1 { color: #fff; font-size: 24px; }
-.logo span { color: var(--gold); }
-nav ul { list-style: none; display: flex; gap: 20px; }
-nav ul li a { color: var(--text-light); text-decoration: none; font-weight: bold; transition: 0.3s; }
-nav ul li a:hover, nav ul li a.active { color: var(--gold); }
-
-/* TikTok Button */
-.tiktok-btn {
-    background: linear-gradient(45deg, #00f2fe, #4facfe);
-    color: #fff;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 20px;
-    font-weight: bold;
-    box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
-    transition: 0.3s;
-}
-.tiktok-btn:hover { transform: scale(1.05); }
-
-/* Dashboard Grid */
-.dashboard {
-    display: grid;
-    grid-template-columns: 2fr 1.5fr 1fr;
-    gap: 20px;
-    padding: 30px 5%;
-}
-
-.widget {
-    background: var(--panel-bg);
-    padding: 20px;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-.widget h2 {
-    color: var(--gold);
-    font-size: 18px;
-    margin-bottom: 20px;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-    padding-bottom: 10px;
-}
-
-/* AI News Boxes */
+/* تصميم علب تحليل الذكاء الاصطناعي */
 .ai-box {
-    background: rgba(255, 255, 255, 0.03);
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 15px;
-    border-right: 4px solid #888;
+    background: linear-gradient(145deg, #1a202c, #151a27);
+    border-left: 5px solid var(--gold);
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
-.ai-box.positive { border-right-color: var(--up-color); }
-.ai-box.negative { border-right-color: var(--down-color); }
-.ai-box h3 { font-size: 14px; margin-bottom: 10px; }
-.ai-impact { font-size: 12px; font-weight: bold; margin-bottom: 5px; }
-.ai-analysis { font-size: 13px; color: #aaa; }
 
-/* Tweets */
-.tweet-box {
-    background: #000;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 15px;
+.asset-tag {
+    background: var(--gold);
+    color: #000;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
 }
-.tweet-author { color: var(--gold); font-weight: bold; font-size: 14px; margin-bottom: 5px; }
-.tweet-time { font-size: 11px; color: #666; display: block; margin-top: 10px; }
 
-/* Responsive */
-@media (max-width: 1024px) {
-    .dashboard { grid-template-columns: 1fr; }
+.source-tag {
+    float: left;
+    color: #666;
+    font-size: 12px;
 }
+
+.positive { border-left-color: #00ff88; box-shadow: 0 0 10px rgba(0, 255, 136, 0.1); }
+.negative { border-left-color: #ff3366; box-shadow: 0 0 10px rgba(255, 51, 102, 0.1); }
+
+/* تحسين السكرول بار */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-dark); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
