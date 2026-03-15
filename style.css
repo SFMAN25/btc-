@@ -1,70 +1,46 @@
+/* حافظ على المتغيرات الموجودة لديك [cite: 67, 68, 69] */
 :root {
-    --bg: #05070a;
-    --card-bg: #0f121a;
-    --border: #1e222d;
-    --gold: #f0b90b;
+    --bg-main: #0b0e11;
+    --bg-card: #181a20;
+    --gold: #FCD535;
     --green: #0ecb81;
     --red: #f6465d;
-    --text: #eaecef;
+    --text-main: #EAECEF;
+    --border: #2b3139;
 }
 
-body { background-color: var(--bg); color: var(--text); margin: 0; font-family: 'Cairo', sans-serif; overflow: hidden; }
-
-/* Layout Grid */
-.dashboard-grid { 
-    display: grid; 
-    grid-template-columns: 280px 1fr 300px; 
-    gap: 12px; 
-    padding: 12px; 
-    height: calc(100vh - 65px); 
+/* تعديل الهيكل ليكون متجاوباً مع العناصر الجديدة */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 300px 1fr 320px; 
+    gap: 15px;
+    padding: 15px;
+    height: calc(100vh - 80px); /* تقليل الارتفاع للسماح بالهيدر [cite: 76] */
 }
 
-/* العمود الأوسط المطور */
-.col-main { 
-    display: flex; 
-    flex-direction: column; 
-    gap: 12px; 
-    overflow-y: auto; /* يسمح بالتمرير إذا زادت العناصر عن الشاشة */
+.col-center {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow-y: auto; /* هذا يسمح برؤية المؤشرات والأخبار تحت الشارت [cite: 77] */
     padding-right: 5px;
 }
 
-/* الشارت العملاق */
-.chart-container { 
-    min-height: 500px; /* حجم الشارت الأصلي الكبير */
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 0;
+.chart-card {
+    min-height: 500px; /* حجم الشارت الكبير [cite: 91] */
+    flex-shrink: 0;
 }
 
-#tv_main_chart { height: 100%; width: 100%; }
-
-/* البطاقات الأخرى */
-.card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px; }
-.card-header { font-size: 13px; color: var(--gold); font-weight: bold; margin-bottom: 10px; border-bottom: 1px solid var(--border); padding-bottom: 5px; }
-
-/* قسم الأخبار والمؤشرات في الأسفل */
-.ai-economic-news, .technical-summary-center { min-height: 200px; }
-
-/* العداد والاقتراحات */
-.gauge-wrapper { position: relative; width: 160px; height: 80px; margin: 10px auto; overflow: hidden; }
-.gauge-body { width: 160px; height: 160px; background: #222; border-radius: 50%; position: relative; }
-.gauge-fill {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: conic-gradient(from 270deg, var(--red) 0%, var(--gold) 50%, var(--green) 100%);
-    transform-origin: center; transition: 1.5s;
+.ai-news-card, .technical-summary-center {
+    min-height: 250px;
+    flex-shrink: 0;
 }
-.gauge-cover { width: 130px; height: 130px; background: var(--card-bg); border-radius: 50%; position: absolute; bottom: 0; left: 15px; }
 
-.suggestion-list { list-style: none; padding: 0; font-size: 13px; color: #b7bdc6; }
-.suggestion-list li { margin-bottom: 8px; border-right: 3px solid var(--green); padding-right: 8px; }
-
-/* تحسين شريط التمرير */
-.col-main::-webkit-scrollbar { width: 6px; }
-.col-main::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
-
-.header { display: flex; justify-content: space-between; align-items: center; padding: 10px 25px; background: var(--card-bg); border-bottom: 1px solid var(--border); }
-.logo span { color: var(--gold); font-weight: 900; }
-.nav-links a { color: #848e9c; text-decoration: none; margin: 0 15px; font-weight: bold; cursor: pointer; }
-.nav-links a.active { color: var(--gold); border-bottom: 2px solid var(--gold); }
-.tiktok-btn { background: var(--gold); color: #000; padding: 5px 12px; border-radius: 15px; text-decoration: none; font-weight: bold; font-size: 12px; }
+/* تنسيق خبر البنوك */
+.bank-news-item {
+    background: #1e222d;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    border-right: 4px solid var(--gold);
+}
