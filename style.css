@@ -1,108 +1,68 @@
 :root {
-    --bg-main: #0b0e11; /* لون خلفية باينانس الاحترافي */
-    --bg-card: #181a20; /* لون الكروت */
-    --gold: #FCD535; /* أصفر/ذهبي فخم */
+    --bg-deep: #050608;
+    --card-bg: #111419;
+    --border: #242830;
+    --gold: #f0b90b;
     --green: #0ecb81;
     --red: #f6465d;
-    --text-main: #EAECEF;
-    --border: #2b3139;
+    --text-white: #eaecef;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
+body {
+    background-color: var(--bg-deep);
+    color: var(--text-white);
+    margin: 0;
+    font-family: 'Cairo', sans-serif;
+    overflow: hidden;
+}
 
-body { background-color: var(--bg-main); color: var(--text-main); overflow-x: hidden; }
-
-/* Header */
 .header {
     display: flex; justify-content: space-between; align-items: center;
-    background: var(--bg-card); padding: 15px 30px;
-    border-bottom: 1px solid var(--border);
+    padding: 12px 30px; background: var(--card-bg); border-bottom: 1px solid var(--border);
 }
-.logo { font-size: 26px; font-weight: 800; color: #fff; }
-.logo span { color: var(--gold); }
-.nav-links a { color: #888; text-decoration: none; margin: 0 15px; font-weight: 600; font-size: 16px; transition: 0.3s; }
-.nav-links a:hover, .nav-links a.active { color: var(--gold); border-bottom: 2px solid var(--gold); padding-bottom: 5px; }
-.tiktok { color: var(--bg-main); text-decoration: none; font-weight: bold; background: var(--gold); padding: 8px 15px; border-radius: 20px; transition: 0.3s;}
-.tiktok:hover { opacity: 0.8; }
 
-/* Dashboard Grid Layout */
+.logo span { color: var(--gold); font-weight: 900; }
+
+.nav-links a { color: #848e9c; text-decoration: none; margin: 0 15px; font-weight: bold; transition: 0.3s; }
+.nav-links a.active { color: var(--gold); border-bottom: 2px solid var(--gold); padding-bottom: 5px; }
+
 .dashboard-grid {
-    display: grid;
-    grid-template-columns: 320px 1fr 350px; 
-    gap: 20px;
-    padding: 20px;
-    height: calc(100vh - 120px);
+    display: grid; grid-template-columns: 300px 1fr 320px; gap: 12px;
+    padding: 12px; height: calc(100vh - 65px);
 }
 
-.col-left, .col-center, .col-right { display: flex; flex-direction: column; gap: 20px; }
-
-/* Cards */
 .card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 10px; padding: 15px; display: flex; flex-direction: column; overflow: hidden;
 }
+
 .card-header {
-    font-size: 16px; color: var(--gold); font-weight: 700;
-    margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid var(--border);
+    font-size: 14px; color: var(--gold); font-weight: bold;
+    margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 10px;
 }
 
-/* Timeframes */
-.timeframes { display: flex; justify-content: space-between; margin-bottom: 20px; background: var(--bg-main); padding: 5px; border-radius: 8px; border: 1px solid var(--border); }
-.tf-btn {
-    background: transparent; border: none; color: #888; padding: 5px 10px;
-    border-radius: 5px; cursor: pointer; font-weight: bold; font-family: 'Cairo'; transition: 0.3s;
-}
-.tf-btn:hover, .tf-btn.active { background: var(--border); color: var(--text-main); }
+/* الشارت العملاق */
+.chart-container { flex: 2.5; padding: 0; }
 
-/* AI Gauge */
-.gauge-box { text-align: center; margin-top: 10px; }
-.gauge { width: 220px; height: 110px; margin: 0 auto; position: relative; overflow: hidden; }
-.gauge-bg {
-    width: 220px; height: 220px; border-radius: 50%;
-    background: conic-gradient(from 270deg, var(--red) 0deg, var(--gold) 90deg, var(--green) 180deg, transparent 180deg);
-    position: absolute; top: 0; left: 0;
-}
-.gauge-cover {
-    width: 180px; height: 180px; background: var(--bg-card);
-    border-radius: 50%; position: absolute; top: 20px; left: 20px;
-}
-.gauge-needle {
-    width: 4px; height: 100px; background: #fff;
-    position: absolute; bottom: 0; left: 108px;
-    transform-origin: bottom center;
-    transform: rotate(45deg);
-    transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
-    border-radius: 4px; z-index: 10;
-}
-.gauge-needle::after {
-    content: ''; width: 14px; height: 14px; background: #fff;
-    border-radius: 50%; position: absolute; bottom: -5px; left: -5px;
-}
-.ai-result-text { font-size: 24px; font-weight: 800; color: var(--green); margin-top: 15px; }
-.ai-confidence { color: #888; font-size: 14px; margin-top: 5px; }
-.ai-confidence span { color: var(--gold); font-weight: bold; }
+/* أخبار الذكاء الاصطناعي للمؤسسات */
+.institutional-feed { flex: 1; margin-top: 10px; background: #0a0c10; }
+.ai-news-item { border-right: 4px solid var(--gold); background: #161a21; padding: 10px; margin-bottom: 10px; border-radius: 4px; }
+.ai-news-item .source { font-size: 11px; font-weight: 900; color: var(--gold); text-transform: uppercase; }
+.ai-news-item p { font-size: 13px; margin: 5px 0 0; line-height: 1.5; color: #d1d4dc; }
 
-/* Center Column Heights (حل مشكلة اختفاء الشارت) */
-.col-center { flex: 1; min-height: 600px; }
-.chart-card { flex: 2; min-height: 400px; padding: 10px; }
-.indicators-card { flex: 1; min-height: 250px; padding: 10px; }
-
-/* Alerts */
-.alerts-grid { display: flex; justify-content: space-between; gap: 10px; }
-.alert-box { background: var(--bg-main); padding: 15px 10px; text-align: center; border-radius: 8px; flex: 1; border-top: 3px solid var(--gold); border: 1px solid var(--border); }
-.alert-box i { font-size: 24px; margin-bottom: 10px; display: block; color: var(--gold); }
-.alert-box span { display: block; font-size: 14px; font-weight: bold; color: var(--text-main); }
-.alert-box small { color: var(--green); font-size: 12px; font-weight: bold; }
-
-/* Scrollbar */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg-main); }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
-
-@media (max-width: 1200px) {
-    .dashboard-grid { grid-template-columns: 1fr; height: auto; }
+/* العداد الاحترافي */
+.gauge-wrapper { position: relative; width: 200px; height: 100px; margin: 0 auto; overflow: hidden; }
+.gauge-body { width: 200px; height: 200px; background: #1e222d; border-radius: 50%; position: relative; }
+.gauge-fill {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: conic-gradient(from 270deg, var(--red) 0%, var(--gold) 50%, var(--green) 100%);
+    transform-origin: center; transform: rotate(0.1turn); transition: 1.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
+.gauge-cover { width: 160px; height: 160px; background: var(--card-bg); border-radius: 50%; position: absolute; bottom: 0; left: 20px; }
+.signal-text { text-align: center; font-size: 20px; font-weight: 900; margin-top: 15px; }
+
+/* مقترحات المؤشرات */
+.suggestion-tag { display: block; background: #1e222d; padding: 8px; border-radius: 5px; margin-bottom: 8px; font-size: 13px; border-left: 3px solid var(--green); }
+.suggestion-tag i { margin-left: 8px; color: var(--gold); }
+
+.tiktok-btn { background: var(--gold); color: #000; padding: 6px 15px; border-radius: 20px; text-decoration: none; font-weight: 900; font-size: 12px; }
