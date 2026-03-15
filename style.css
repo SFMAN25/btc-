@@ -17,7 +17,6 @@ body { background-color: var(--bg-main); color: #EAECEF; margin: 0; font-family:
     height: calc(100vh - 80px);
 }
 
-/* أهم تعديل للعمود الأوسط */
 .col-center {
     display: flex;
     flex-direction: column;
@@ -26,22 +25,21 @@ body { background-color: var(--bg-main); color: #EAECEF; margin: 0; font-family:
     padding-right: 5px;
 }
 
-.chart-card {
-    min-height: 550px; /* إعادة حجم الشارت للضخامة */
-    flex-shrink: 0;
-}
-
-.insight-card, .tech-summary-card {
-    min-height: 250px;
-    flex-shrink: 0;
-}
+.chart-card { min-height: 550px; flex-shrink: 0; }
+.insight-card { min-height: 180px; flex-shrink: 0; }
+.indicators-card { min-height: 400px; flex-shrink: 0; }
 
 .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 15px; }
-.card-header { color: var(--gold); font-weight: 700; border-bottom: 1px solid var(--border); margin-bottom: 10px; padding-bottom: 5px; }
+.card-header { color: var(--gold); font-weight: 700; border-bottom: 1px solid var(--border); margin-bottom: 10px; padding-bottom: 8px; font-size: 14px; }
 
-/* تنسيق أخبار البنوك */
+/* العداد */
+.gauge-box { position: relative; text-align: center; }
+.gauge { position: relative; width: 200px; height: 100px; margin: 0 auto; overflow: hidden; }
+.gauge-bg { width: 200px; height: 200px; border-radius: 50%; background: conic-gradient(from 270deg, var(--red), var(--gold), var(--green)); }
+.gauge-cover { position: absolute; top: 20px; left: 20px; width: 160px; height: 160px; background: var(--bg-card); border-radius: 50%; }
+.gauge-needle { position: absolute; bottom: 0; left: 50%; width: 4px; height: 80px; background: #fff; transform-origin: bottom; transition: 1s; }
+
 .bank-news-item { background: #1e222d; padding: 10px; border-radius: 6px; margin-bottom: 8px; border-right: 4px solid var(--gold); font-size: 13px; }
 
-/* شريط التمرير */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
