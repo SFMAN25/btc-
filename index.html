@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BODA AI-Trade | Global Intelligence</title>
+    <title>BODA AI-Trade | Pro Intelligence</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -11,14 +11,15 @@
 <body>
 
     <header class="header">
-        <div class="logo">BODA <span>AI-Trade</span></div>
+        <div class="logo">BODA <span>AI-Trade Pro</span></div>
         <nav class="nav-links" id="main-nav">
-            <a href="#" class="nav-item active" data-symbol="BINANCE:BTCUSDT">سوق الكريبتو</a>
-            <a href="#" class="nav-item" data-symbol="FX:EURUSD">سوق الفوركس</a>
-            <a href="#" class="nav-item" data-symbol="OANDA:XAUUSD">سوق الذهب</a>
+            <a href="#" class="nav-item active" data-symbol="BINANCE:BTCUSDT" data-type="crypto">الكريبتو</a>
+            <a href="#" class="nav-item" data-symbol="FX:EURUSD" data-type="forex">الفوركس</a>
+            <a href="#" class="nav-item" data-symbol="OANDA:XAUUSD" data-type="gold">الذهب</a>
         </nav>
         <div class="header-right">
-            <span id="market-status" class="status-online"><i class="fas fa-circle"></i> الأنظمة متصلة</span>
+            <span id="market-status" class="status-online"><i class="fas fa-circle"></i> السوق مفتوح</span>
+            <a href="https://t.me/Boss_Trading_Signal" target="_blank" class="tiktok-btn telegram-btn"><i class="fab fa-telegram"></i> @Boss_Trading_Signal</a>
             <a href="https://www.tiktok.com/@bo_da.0" target="_blank" class="tiktok-btn"><i class="fab fa-tiktok"></i> @bo_da.0</a>
         </div>
     </header>
@@ -27,24 +28,24 @@
         
         <aside class="col-side">
             <div class="card ai-main-card">
-                <div class="card-header"><i class="fas fa-brain"></i> AI Signal Analysis</div>
+                <div class="card-header"><i class="fas fa-robot"></i> AI Signal Analysis</div>
                 <div class="gauge-wrapper">
                     <div class="gauge-body">
                         <div class="gauge-fill" id="gauge-ptr"></div>
                         <div class="gauge-cover"></div>
                     </div>
-                    <div id="ai-signal-result" class="signal-text">جاري الفحص...</div>
+                    <div id="ai-signal-result" class="signal-text">جاري التحليل...</div>
                 </div>
-                <div class="ai-metrics">
-                    <div class="metric"><span>قوة الاتجاه:</span> <b id="trend-val">--</b></div>
-                    <div class="metric"><span>مستوى الثقة:</span> <b id="conf-val">--</b></div>
+                <div class="ai-details">
+                    <p>قوة الاتجاه: <span id="trend-strength">--%</span></p>
+                    <p>مستوى الثقة (AI): <span id="confidence-level" class="high-risk">--%</span></p>
                 </div>
             </div>
 
             <div class="card indicators-suggestion">
-                <div class="card-header"><i class="fas fa-vial"></i> Pro Indicator Tips</div>
-                <div id="indicator-tips-container" class="tips-content">
-                    </div>
+                <div class="card-header"><i class="fas fa-lightbulb"></i> Indicator Tips AI</div>
+                <ul class="suggestion-list" id="indicator-tips">
+                    </ul>
             </div>
         </aside>
 
@@ -53,22 +54,22 @@
                 <div id="tradingview_widget"></div>
             </div>
 
-            <div class="card ai-economic-insight">
-                <div class="card-header"><i class="fas fa-landmark"></i> Institutional AI Insight (Banks & Corp Feed)</div>
-                <div class="institutional-feed" id="ai-news-feed">
+            <div class="card ai-news-engine">
+                <div class="card-header"><i class="fas fa-university"></i> AI Institutional Feed</div>
+                <div class="news-grid" id="ai-news-feed">
                     </div>
             </div>
         </section>
 
         <aside class="col-side">
-            <div class="card technical-summary">
-                <div class="card-header"><i class="fas fa-chart-pie"></i> Technical Analysis</div>
-                <div id="tv-tech-summary" class="widget-h"></div>
+            <div class="card technical-widget">
+                <div class="card-header"><i class="fas fa-chart-line"></i> Technical Summary</div>
+                <div id="tv-tech-summary"></div>
             </div>
 
             <div class="card live-news">
-                <div class="card-header"><i class="fas fa-stream"></i> Global Finance Stream</div>
-                <div id="tv-news-timeline" class="widget-h"></div>
+                <div class="card-header"><i class="fas fa-broadcast-tower"></i> Live Finance News</div>
+                <div id="tv-news-timeline"></div>
             </div>
         </aside>
 
