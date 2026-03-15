@@ -1,83 +1,51 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BODA AI-Trade Pro | Institutional Intelligence</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
+/* تنسيق الشاشة العملاقة للشارت */
+.main-dashboard {
+    display: grid;
+    /* تقليل عرض القوائم الجانبية لإعطاء مساحة عرضية للشارت */
+    grid-template-columns: 200px 1fr 240px; 
+    gap: 5px;
+    padding: 5px;
+    height: calc(100vh - 70px); /* استغلال طول الشاشة بالكامل */
+}
 
-    <div class="ticker-wrapper">
-        <div id="tradingview-ticker"></div>
-    </div>
+.center-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
 
-    <header class="header">
-        <div class="logo">BODA <span>AI-Trade Pro</span></div>
-        <nav class="nav-tabs">
-            <a href="#" class="nav-tab active" data-symbol="BINANCE:BTCUSDT" data-type="crypto">سوق الكريبتو</a>
-            <a href="#" class="nav-tab" data-symbol="FX:EURUSD" data-type="forex">سوق الفوركس</a>
-            <a href="#" class="nav-tab" data-symbol="OANDA:XAUUSD" data-type="gold">سوق الذهب</a>
-        </nav>
-        <div class="header-actions">
-            <span class="connection-status"><i class="fas fa-circle"></i> الأنظمة متصلة</span>
-            <a href="https://t.me/Boss_Trading_Signal" target="_blank" class="btn-social btn-telegram"><i class="fab fa-telegram"></i></a>
-            <a href="https://www.tiktok.com/@bo_da.0" target="_blank" class="btn-social btn-tiktok"><i class="fab fa-tiktok"></i></a>
-        </div>
-    </header>
+/* تكبير الشارت لـ 75% من مساحة المنتصف */
+.chart-section {
+    flex: 3; 
+    min-height: 65vh; /* يضمن أن الشارت يأخذ أغلب الطول */
+    border: 2px solid var(--border);
+}
 
-    <main class="main-dashboard">
-        <aside class="side-panel left-panel">
-            <div class="card full-height">
-                <div class="card-title">GLOBAL FINANCE STREAM</div>
-                <div id="tv-news-timeline"></div>
-            </div>
-        </aside>
+/* تصغير منطقة الأدوات السفلية */
+.analysis-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    flex: 1;
+    max-height: 25vh; /* تحديد طول الأدوات السفلية ليبقى الشارت كبيراً */
+}
 
-        <section class="center-panel">
-            <div class="card chart-section">
-                <div id="tradingview_main_chart"></div>
-            </div>
-            
-            <div class="analysis-grid">
-                <div class="card">
-                    <div class="card-title"><i class="fas fa-university"></i> INSTITUTIONAL AI INSIGHT</div>
-                    <div id="institutional-feed" class="scroll-content"></div>
-                </div>
-                
-                <div class="card">
-                    <div class="card-title"><i class="fas fa-chart-line"></i> TECHNICAL ANALYSIS SUMMARY</div>
-                    <div id="technical-summary-widget"></div>
-                </div>
-            </div>
-        </section>
+/* تحسين الخطوط والمساحات لتناسب الحجم الصغير للأدوات */
+.card-title {
+    font-size: 10px;
+    padding: 5px 10px;
+}
 
-        <aside class="side-panel right-panel">
-            <div class="card">
-                <div class="card-title">AI SIGNAL ANALYSIS</div>
-                <div class="gauge-box">
-                    <div class="gauge-container">
-                        <div class="gauge-track"></div>
-                        <div class="gauge-needle" id="signal-needle"></div>
-                    </div>
-                    <div id="signal-output" class="signal-text">جاري التحليل...</div>
-                </div>
-                <div class="signal-metrics">
-                    <div class="metric">قوة الاتجاه: <span id="trend-power">--%</span></div>
-                    <div class="metric">مستوى الثقة: <span id="conf-power">--%</span></div>
-                </div>
-            </div>
+.scroll-content {
+    font-size: 11px;
+    padding: 5px;
+}
 
-            <div class="card tips-section">
-                <div class="card-title">PRO INDICATOR TIPS</div>
-                <ul id="ai-indicator-tips" class="tips-list"></ul>
-            </div>
-        </aside>
-    </main>
-
-    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-    <script src="script.js"></script>
-</body>
-</html>
+/* جعل العداد أصغر قليلاً ليوفر مساحة */
+.gauge-box {
+    padding: 10px 5px;
+}
+.gauge-container {
+    width: 120px;
+    height: 60px;
+}
