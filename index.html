@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BODA AI-Trade | Pro Intelligence</title>
+    <title>BODA AI-Trade | Dashboard</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -35,35 +35,41 @@
                     <div class="ai-confidence">قوة الإشارة: <span id="ai-percent">--</span></div>
                 </div>
             </div>
-            
-            <div class="card indicators-suggestion">
+
+            <div class="card suggestion-card">
                 <div class="card-header"><i class="fas fa-lightbulb"></i> Indicator Suggestions</div>
-                <ul id="indicator-tips" style="list-style: none; padding: 0; font-size: 14px; color: #888;">
-                    </ul>
+                <ul id="indicator-tips" class="tips-list"></ul>
             </div>
         </div>
 
         <div class="col-center">
             <div class="card chart-card">
-                <div id="tv_main_chart" style="width: 100%; height: 100%;"></div>
+                <div id="tv_main_chart" style="height: 100%; width: 100%;"></div>
             </div>
 
-            <div class="card ai-news-card">
+            <div class="card insight-card">
                 <div class="card-header"><i class="fas fa-university"></i> AI Economic Insight (Bank & Institutional Feed)</div>
-                <div id="ai-news-feed" style="font-size: 13px; color: #EAECEF; max-height: 150px; overflow-y: auto;">
-                    </div>
+                <div id="ai-news-feed" class="news-content"></div>
             </div>
 
-            <div class="card technical-summary-center">
+            <div class="card tech-summary-card">
                 <div class="card-header"><i class="fas fa-chart-line"></i> Technical Analysis Summary</div>
-                <div id="tv-tech-analysis-content" style="height: 300px;"></div>
+                <div id="tv-technical-analysis" style="height: 350px;"></div>
             </div>
         </div>
 
         <div class="col-right">
             <div class="card news-card">
                 <div class="card-header"><i class="fas fa-newspaper"></i> Live Finance Stream</div>
-                <div id="tv-news-timeline" style="height: 600px;"></div>
+                <div id="tv-news-timeline" style="height: 500px;"></div>
+            </div>
+
+            <div class="card alerts-card">
+                <div class="card-header"><i class="fas fa-bell"></i> Opportunity Alerts</div>
+                <div class="alerts-grid">
+                    <div class="alert-box gold"><span>BTC/USDT</span><small>Strong Buy</small></div>
+                    <div class="alert-box silver"><span>ETH/USDT</span><small>Buy</small></div>
+                </div>
             </div>
         </div>
 
