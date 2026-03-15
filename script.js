@@ -1,119 +1,74 @@
+// بيانات لمحاكاة الأخبار المؤسسية واقتراحات المؤشرات
 const marketData = {
     "BINANCE:BTCUSDT": {
-        news: [
-            { source: "FED", msg: "الفيدرالي يلمح لثبات الفائدة، مما يدعم استمرار زخم الكريبتو." },
-            { source: "JP Morgan", msg: "توقعات بدخول سيولة ضخمة من صناديق التحوط للسوق الأسبوع القادم." }
-        ],
-        tips: ["استخدم RSI لمراقبة مناطق التشبع فوق 70", "تقاطع MACD إيجابي على فريم 4 ساعات", "راقب مستوى الدعم عند 62,000"]
+        news: [{ s: "FED", m: "الفيدرالي يلمح لثبات الفائدة، مما يدعم زخم البيتكوين." }, { s: "JP Morgan", m: "توقعات بدخول سيولة مؤسسية ضخمة هذا الأسبوع." }],
+        tips: ["مؤشر RSI فوق 60 - زخم صاعد", "تقاطع MACD إيجابي", "راقب دعم 65,000"]
     },
     "FX:EURUSD": {
-        news: [
-            { source: "ECB", msg: "بيانات التضخم الأوروبية تشير لثبات اليورو أمام الدولار حالياً." },
-            { source: "Goldman Sachs", msg: "توقعات بكسر مستويات المقاومة في حال استمرار ضعف مؤشر الدولار." }
-        ],
-        tips: ["فعل Bollinger Bands لمراقبة ضيق الانفجار السعري", "مؤشر الاستوكاستك في مناطق تشبع بيعي", "راقب مستوى 1.0820"]
+        news: [{ s: "ECB", m: "البنك المركزي الأوروبي يراقب التضخم، واليورو يستقر." }, { s: "BofA", m: "توقعات بحركة عرضية لزوج EUR/USD." }],
+        tips: ["مؤشر الاستوكاستك في تشبع بيعي", "راقب كسر مستوى 1.0850", "ضعف في التقلبات السعرية"]
     },
     "OANDA:XAUUSD": {
-        news: [
-            { source: "Central Banks", msg: "تزايد الطلب الفعلي على الذهب من بنوك آسيا المركزية." },
-            { source: "Global Pulse", msg: "التوترات الجيوسياسية تدفع الذهب لاختبار قمم تاريخية جديدة." }
-        ],
-        tips: ["الذهب في اتجاه صاعد قوي فوق EMA 200", "RSI يقترب من منطقة مبالغة في الشراء", "استخدم فيبوناتشي لتحديد الارتداد"]
+        news: [{ s: "Gold Council", m: "زيادة طلب البنوك المركزية على الذهب كملاذ آمن." }, { s: "Goldman Sachs", m: "توقعات بوصول الذهب لقمم تاريخية جديدة." }],
+        tips: ["الاتجاه العام صاعد فوق EMA 200", "RSI يقترب من تشبع شرائي", "استخدم فيبوناتشي لتحديد الأهداف"]
     }
 };
 
-let currentChart = null;
-
-function initPlatform(symbol) {
-    // 1. الشارت الرئيسي (الحجم الكبير)
-    if (currentChart) { document.getElementById('tv_main_chart').innerHTML = ''; }
-    currentChart = new TradingView.widget({
+function updateDashboard(symbol) {
+    // 1. تحديث الشارت الرئيسي [cite: 120]
+    document.getElementById('tv_main_chart').innerHTML = '';
+    new TradingView.widget({
         "autosize": true,
         "symbol": symbol,
         "interval": "60",
         "theme": "dark",
         "style": "1",
-        "locale": "ar",
+        "locale": "ar_AE",
         "container_id": "tv_main_chart"
     });
 
-    // 2. تحديث المحتوى الديناميكي
-    updateAIContent(symbol);
-    
-    // 3. تحديث الملخص الفني (الذي تم نقله للمنتصف)
-    updateTechnicalWidget(symbol);
-    
-    // 4. تحديث التايم لاين الجانبي
-    updateNewsTimeline();
-}
-
-function updateAIContent(symbol) {
+    // 2. تحديث الأخبار والاقتراحات
     const data = marketData[symbol] || marketData["BINANCE:BTCUSDT"];
+    document.getElementById('ai-news-feed').innerHTML = data.news.map(n => `
+        <div class="bank-news-item"><b>${n.s}:</b> ${n.m}</div>
+    `).join('');
     
-    const newsFeed = document.getElementById('ai-news-feed');
-    newsFeed.innerHTML = data.news.map(n => `
-        <div class="news-item" style="background:#161a25; padding:10px; border-radius:6px; margin-bottom:8px; border-right:4px solid var(--gold);">
-            <b style="color:var(--gold); font-size:11px;">${n.source} Analysis</b>
-            <p style="font-size:13px; margin:5px 0;">${n.msg}</p>
-        </div>
+    document.getElementById('indicator-tips').innerHTML = data.tips.map(t => `
+        <li style="margin-bottom:8px;"><i class="fas fa-check-circle" style="color:var(--gold);"></i> ${t}</li>
     `).join('');
 
-    const tipsList = document.getElementById('indicator-tips');
-    tipsList.innerHTML = data.tips.map(t => `<li><i class="fas fa-check"></i> ${t}</li>`).join('');
-
-    simulateGauge();
-}
-
-function updateTechnicalWidget(symbol) {
-    const container = document.getElementById('tv-tech-summary-content');
-    container.innerHTML = '';
-    const script = document.createElement('script');
-    script.src = "https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js";
-    script.async = true;
-    script.innerHTML = JSON.stringify({
-        "interval": "1h", "width": "100%", "height": "350",
-        "symbol": symbol, "showIntervalTabs": true, "locale": "ar", "colorTheme": "dark"
+    // 3. تحديث ملخص التحليل الفني (تحت الأخبار) [cite: 107, 108]
+    const techContainer = document.getElementById('tv-tech-analysis-content');
+    techContainer.innerHTML = '';
+    const techScript = document.createElement('script');
+    techScript.src = "https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js";
+    techScript.async = true;
+    techScript.innerHTML = JSON.stringify({
+        "interval": "1h", "width": "100%", "height": "100%",
+        "symbol": symbol, "showIntervalTabs": true, "locale": "ar_AE", "colorTheme": "dark"
     });
-    container.appendChild(script);
-}
+    techContainer.appendChild(techScript);
 
-function updateNewsTimeline() {
-    const container = document.getElementById('tv-news-timeline');
-    container.innerHTML = '';
-    const script = document.createElement('script');
-    script.src = "https://s3.tradingview.com/external-embedding/embed-widget-timeline.js";
-    script.async = true;
-    script.innerHTML = JSON.stringify({
-        "feedMode": "all_symbols", "colorTheme": "dark", "width": "100%", "height": "600", "locale": "ar"
+    // 4. تحديث التايم لاين الجانبي [cite: 113]
+    const newsContainer = document.getElementById('tv-news-timeline');
+    newsContainer.innerHTML = '';
+    const newsScript = document.createElement('script');
+    newsScript.src = "https://s3.tradingview.com/external-embedding/embed-widget-timeline.js";
+    newsScript.async = true;
+    newsScript.innerHTML = JSON.stringify({
+        "feedMode": "all_symbols", "colorTheme": "dark", "width": "100%", "height": "100%", "locale": "ar_AE"
     });
-    container.appendChild(script);
+    newsContainer.appendChild(newsScript);
 }
 
-function simulateGauge() {
-    const ptr = document.getElementById('gauge-ptr');
-    const res = document.getElementById('ai-signal-result');
-    const conf = document.getElementById('ai-confidence');
-    const val = Math.random();
-    
-    conf.innerText = Math.floor(val * 20 + 78) + "%";
-    
-    if(val > 0.5) {
-        ptr.style.transform = `rotate(0.4turn)`;
-        res.innerText = "صاعد / BUY";
-        res.style.color = "#0ecb81";
-    } else {
-        ptr.style.transform = `rotate(0.1turn)`;
-        res.innerText = "هابط / SELL";
-        res.style.color = "#f6465d";
-    }
-}
-
-document.querySelectorAll('.nav-item').forEach(item => {
-    item.addEventListener('click', function() {
+// ربط أزرار التنقل [cite: 130]
+document.querySelectorAll('.nav-item').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        e.preventDefault();
         document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
         this.classList.add('active');
-        initPlatform(this.getAttribute('data-symbol'));
+        updateDashboard(this.getAttribute('data-symbol'));
     });
 });
 
-window.onload = () => initPlatform("BINANCE:BTCUSDT");
+window.onload = () => updateDashboard("BINANCE:BTCUSDT");
