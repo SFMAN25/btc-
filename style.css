@@ -16,57 +16,67 @@ body { background: var(--bg-dark); color: #fff; height: 100vh; overflow: hidden;
 }
 .logo { font-size: 22px; font-weight: 900; }
 .logo span { color: var(--gold); }
-.nav-links .nav-item { color: #848e9c; text-decoration: none; margin: 0 15px; font-weight: bold; font-size: 15px; }
-.nav-item.active { color: var(--gold); border-bottom: 2px solid var(--gold); }
+.nav-links .nav-item { color: #848e9c; text-decoration: none; margin: 0 15px; font-weight: bold; font-size: 15px; transition: 0.3s; }
+.nav-item.active, .nav-item:hover { color: var(--gold); border-bottom: 2px solid var(--gold); padding-bottom: 5px; }
 .tiktok { background: var(--gold); color: #000; padding: 6px 12px; border-radius: 5px; text-decoration: none; font-weight: bold; }
 
 .dashboard {
     display: grid;
-    grid-template-columns: 300px 1fr 300px; /* تقسيم الشاشة لثلاث أعمدة */
-    gap: 10px;
+    grid-template-columns: 300px 1fr 300px;
+    gap: 15px;
     height: calc(100vh - 60px);
-    padding: 10px;
+    padding: 15px;
 }
 
-.side-col { display: flex; flex-direction: column; gap: 10px; height: 100%; overflow: hidden; }
-.center-col { display: flex; flex-direction: column; gap: 10px; height: 100%; overflow-y: auto; }
+.side-col { display: flex; flex-direction: column; gap: 15px; height: 100%; overflow: hidden; }
+.center-col { display: flex; flex-direction: column; gap: 15px; height: 100%; overflow-y: auto; padding-right: 5px; }
 
 .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; display: flex; flex-direction: column; overflow: hidden; }
-.card-header { background: #20242b; padding: 8px 12px; font-size: 14px; font-weight: bold; color: var(--gold); border-bottom: 1px solid var(--border); }
+.card-header { background: #20242b; padding: 10px 15px; font-size: 14px; font-weight: bold; color: var(--gold); border-bottom: 1px solid var(--border); }
 
-/* الشارتات */
-.main-chart-box { flex: 2; min-height: 450px; }
+/* الشارتات في المنتصف */
+.main-chart-box { flex: 2; min-height: 500px; flex-shrink: 0; }
 #tv_main_chart { height: 100%; width: 100%; }
 
-.market-pulse { flex: 0.5; min-height: 120px; }
-.news-scroll { padding: 10px; font-size: 13px; color: #eaecef; }
+.market-pulse { flex-shrink: 0; min-height: 120px; }
+.news-scroll { padding: 15px; }
 
-.indicators-box { flex: 1.5; min-height: 300px; }
-.bottom-widgets { display: grid; grid-template-columns: 1fr 300px; gap: 10px; height: 100%; padding: 5px; }
+.indicators-box { flex-shrink: 0; min-height: 350px; }
+.bottom-widgets { display: grid; grid-template-columns: 1fr 300px; gap: 15px; height: 300px; padding: 10px; }
 #tv_indicators_chart, #tv_tech_rating { height: 100%; width: 100%; }
 
-/* العداد */
+/* تنسيقات تحليل الأخبار (AI Sentiment) */
+.news-item { background: #1e222d; padding: 12px; border-radius: 8px; border: 1px solid var(--border); }
+.news-text { font-size: 14px; margin-bottom: 12px; line-height: 1.6; color: #EAECEF; }
+.sentiment-box { display: flex; align-items: center; justify-content: space-between; font-size: 13px; font-weight: bold; }
+.sentiment-bar-bg { flex: 1; height: 8px; background: #2b3139; border-radius: 10px; margin: 0 15px; overflow: hidden; }
+.sentiment-fill { height: 100%; border-radius: 10px; transition: width 1s ease-in-out; }
+
+.impact-positive { color: var(--green); }
+.impact-negative { color: var(--red); }
+.bg-positive { background: var(--green); box-shadow: 0 0 8px var(--green); }
+.bg-negative { background: var(--red); box-shadow: 0 0 8px var(--red); }
+
+/* العداد والاقتراحات */
 .gauge-container { text-align: center; padding: 20px 10px; }
 .gauge { width: 180px; height: 90px; margin: 0 auto; position: relative; overflow: hidden; }
 .gauge-bg { width: 180px; height: 180px; border-radius: 50%; background: conic-gradient(from 270deg, var(--red) 0deg, var(--gold) 90deg, var(--green) 180deg, transparent 180deg); }
 .gauge-needle { width: 3px; height: 80px; background: #fff; position: absolute; bottom: 0; left: 88px; transform-origin: bottom center; transition: 1s; }
 .status-text { font-size: 20px; font-weight: 900; margin-top: 10px; }
+.confidence { color: #848e9c; font-size: 14px; margin-top: 5px; }
+.confidence span { color: var(--gold); }
 
-.tips-list { list-style: none; padding: 10px; }
-.tips-list li { font-size: 12px; margin-bottom: 8px; border-right: 3px solid var(--green); padding-right: 8px; color: #b7bdc6; }
+.tips-list { list-style: none; padding: 15px; }
+.tips-list li { font-size: 13px; margin-bottom: 12px; border-right: 3px solid var(--green); padding-right: 10px; color: #b7bdc6; }
 
 .news-card { flex: 1; }
 #tv_news_timeline { height: 100%; }
 
-.bank-news { background: #2b3139; padding: 8px; margin-bottom: 5px; border-radius: 4px; border-left: 3px solid var(--gold); }
+.alerts-list { padding: 15px; }
+.alert-box { background: var(--bg-dark); padding: 15px; text-align: center; border-radius: 8px; border-top: 3px solid var(--gold); border: 1px solid var(--border); }
+.alert-box i { font-size: 24px; color: var(--gold); margin-bottom: 5px; display: block; }
 
-/* تنسيقات تحليل الأخبار */
-.news-item { background: #1e222d; padding: 12px; border-radius: 8px; margin-bottom: 10px; border: 1px solid var(--border); }
-.news-text { font-size: 13px; margin-bottom: 10px; line-height: 1.5; color: #EAECEF; }
-.sentiment-box { display: flex; align-items: center; justify-content: space-between; font-size: 12px; font-weight: bold; }
-.sentiment-bar-bg { flex: 1; height: 6px; background: #2b3139; border-radius: 10px; margin: 0 10px; overflow: hidden; }
-.sentiment-fill { height: 100%; border-radius: 10px; transition: width 1s ease-in-out; }
-.impact-positive { color: var(--green); }
-.impact-negative { color: var(--red); }
-.bg-positive { background: var(--green); box-shadow: 0 0 8px var(--green); }
-.bg-negative { background: var(--red); box-shadow: 0 0 8px var(--red); }
+/* شريط التمرير */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-dark); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
