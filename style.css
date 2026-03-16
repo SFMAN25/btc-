@@ -59,3 +59,14 @@ body { background: var(--bg-dark); color: #fff; height: 100vh; overflow: hidden;
 #tv_news_timeline { height: 100%; }
 
 .bank-news { background: #2b3139; padding: 8px; margin-bottom: 5px; border-radius: 4px; border-left: 3px solid var(--gold); }
+
+/* تنسيقات تحليل الأخبار */
+.news-item { background: #1e222d; padding: 12px; border-radius: 8px; margin-bottom: 10px; border: 1px solid var(--border); }
+.news-text { font-size: 13px; margin-bottom: 10px; line-height: 1.5; color: #EAECEF; }
+.sentiment-box { display: flex; align-items: center; justify-content: space-between; font-size: 12px; font-weight: bold; }
+.sentiment-bar-bg { flex: 1; height: 6px; background: #2b3139; border-radius: 10px; margin: 0 10px; overflow: hidden; }
+.sentiment-fill { height: 100%; border-radius: 10px; transition: width 1s ease-in-out; }
+.impact-positive { color: var(--green); }
+.impact-negative { color: var(--red); }
+.bg-positive { background: var(--green); box-shadow: 0 0 8px var(--green); }
+.bg-negative { background: var(--red); box-shadow: 0 0 8px var(--red); }
