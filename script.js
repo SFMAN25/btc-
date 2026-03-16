@@ -1,27 +1,40 @@
+// بيانات السوق مع تحليل تأثير الأخبار
 const marketData = {
     "BINANCE:BTCUSDT": {
-        tips: ["RSI فوق 60: زخم صاعد قوي", "MACD: تقاطع إيجابي مؤكد", "الدعم: 64,500$"],
-        pulse: "مؤسسة BlackRock تزيد حيازتها؛ سيولة ضخمة تدخل السوق الآن."
+        tips: ["RSI فوق 60: زخم صاعد قوي", "MACD: تقاطع إيجابي مؤكد", "راقب مستوى الدعم: 64,500$"],
+        news: {
+            text: "مؤسسة BlackRock تزيد حيازتها من البيتكوين؛ سيولة ضخمة تدخل السوق الآن.",
+            impact: "positive",
+            percentage: 85
+        }
     },
     "FX:EURUSD": {
         tips: ["RSI عند 45: حركة عرضية", "MACD: ضعف في الاتجاه", "المقاومة: 1.0920"],
-        pulse: "البنك المركزي الأوروبي يلمح لتثبيت الفائدة؛ اليورو يترقب بيانات التضخم."
+        news: {
+            text: "بيانات التضخم الأمريكية جاءت أعلى من المتوقع، مما يعزز قوة الدولار ويضغط على اليورو.",
+            impact: "negative",
+            percentage: 65
+        }
     },
     "OANDA:XAUUSD": {
         tips: ["RSI فوق 70: تشبع شرائي", "الذهب يختبر قمة تاريخية", "الملاذ الآمن مطلوب بشدة"],
-        pulse: "بنوك مركزية عالمية تشتري الذهب بكميات قياسية للتحوط من التضخم."
+        news: {
+            text: "تصاعد التوترات الجيوسياسية يدفع البنوك المركزية لزيادة احتياطيات الذهب كتحوط.",
+            impact: "positive",
+            percentage: 92
+        }
     }
 };
 
 function loadWidgets(symbol) {
-    // 1. الشارت الرئيسي (شموع يابانية)
+    // 1. الشارت الرئيسي
     document.getElementById('tv_main_chart').innerHTML = '';
     new TradingView.widget({
         "autosize": true, "symbol": symbol, "interval": "60", "theme": "dark",
         "style": "1", "locale": "ar_AE", "container_id": "tv_main_chart"
     });
 
-    // 2. شارت المؤشرات (RSI & MACD) في المنتصف بالأسفل
+    // 2. شارت المؤشرات (RSI & MACD) في المنتصف
     document.getElementById('tv_indicators_chart').innerHTML = '';
     new TradingView.widget({
         "autosize": true, "symbol": symbol, "interval": "60", "theme": "dark",
@@ -40,7 +53,7 @@ function loadWidgets(symbol) {
     });
     techDiv.appendChild(techScript);
 
-    // 4. أخبار المال والشركات (العمود الأيسر)
+    // 4. أخبار المال المباشرة
     const newsDiv = document.getElementById('tv_news_timeline');
     newsDiv.innerHTML = '';
     const newsScript = document.createElement('script');
@@ -51,10 +64,27 @@ function loadWidgets(symbol) {
     });
     newsDiv.appendChild(newsScript);
 
-    // تحديث البيانات النصية والنبض
+    // 5. تحديث الاقتراحات ونبض السوق (AI Sentiment)
     const info = marketData[symbol] || marketData["BINANCE:BTCUSDT"];
-    document.getElementById('indicator-tips').innerHTML = info.tips.map(t => `<li>${t}</li>`).join('');
-    document.getElementById('ai-news-feed').innerHTML = `<div class="bank-news">${info.pulse}</div>`;
+    
+    document.getElementById('indicator-tips').innerHTML = info.tips.map(t => `<li><i class="fas fa-magic" style="color:var(--gold); margin-left:5px;"></i> ${t}</li>`).join('');
+    
+    const impactClass = info.news.impact === 'positive' ? 'impact-positive' : 'impact-negative';
+    const bgClass = info.news.impact === 'positive' ? 'bg-positive' : 'bg-negative';
+    const impactWord = info.news.impact === 'positive' ? 'إيجابي 🟢' : 'سلبي 🔴';
+
+    document.getElementById('ai-news-feed').innerHTML = `
+        <div class="news-item">
+            <div class="news-text"><i class="fas fa-satellite-dish" style="color:var(--gold);"></i> ${info.news.text}</div>
+            <div class="sentiment-box">
+                <span>التأثير: <span class="${impactClass}">${impactWord}</span></span>
+                <div class="sentiment-bar-bg">
+                    <div class="sentiment-fill ${bgClass}" style="width: ${info.news.percentage}%;"></div>
+                </div>
+                <span class="${impactClass}">${info.news.percentage}%</span>
+            </div>
+        </div>
+    `;
 
     updateGauge();
 }
@@ -66,7 +96,6 @@ function updateGauge() {
     const score = Math.floor(Math.random() * 100);
     
     aiPercent.innerText = score + "%";
-    // تحويل النسبة لزاوية دوران
     const angle = (score * 1.8) - 90;
     needle.style.transform = `rotate(${angle}deg)`;
 
