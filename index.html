@@ -3,87 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BODA AI-Trade | Pro Dashboard</title>
+    <title>SFMAN FUTURES LIVE</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- استدعاء مكتبة تريدنج فيو المباشرة بدون تأخير -->
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
 </head>
 <body>
 
-    <header class="header">
-        <div class="logo">BODA <span>AI-Trade</span></div>
-        <nav class="nav-links">
-            <a href="#" class="nav-item active" data-symbol="BINANCE:BTCUSDT">الكريبتو</a>
-            <a href="#" class="nav-item" data-symbol="FX:EURUSD">الفوركس</a>
-            <a href="#" class="nav-item" data-symbol="OANDA:XAUUSD">الذهب</a>
-        </nav>
-        <div class="header-left">
-            <a href="https://www.tiktok.com/@bo_da.0" target="_blank" class="tiktok"><i class="fab fa-tiktok"></i> @bo_da.0</a>
+    <!-- شريط العناوين والبراندنج -->
+    <header class="dashboard-header">
+        <div class="logo-zone">
+            <span class="live-indicator">⚡ LIVE</span>
+            <h1>SFMAN FUTURES LIVE</h1>
+        </div>
+        <div class="credits">
+            <p>Developed with dedication by <span class="author-name">SFMAN</span> 🔥</p>
         </div>
     </header>
 
-    <main class="dashboard">
-        
-        <div class="side-col">
-            <div class="card ai-main-card">
-                <div class="card-header"><i class="fas fa-robot"></i> تحليل AI النهائي</div>
-                <div class="gauge-container">
-                    <div class="gauge">
-                        <div class="gauge-bg"></div>
-                        <div class="gauge-needle" id="gauge-needle"></div>
-                    </div>
-                    <div id="ai-text" class="status-text">جاري الفحص...</div>
-                    <div class="confidence">الثقة: <span id="ai-percent">0%</span></div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header"><i class="fas fa-bolt"></i> اقتراحات المؤشرات</div>
-                <ul id="indicator-tips" class="tips-list"></ul>
-            </div>
-        </div>
-
-        <div class="center-col">
-            <div class="card main-chart-box">
-                <div id="tv_main_chart"></div>
-            </div>
-
-            <div class="card market-pulse">
-                <div class="card-header"><i class="fas fa-brain"></i> تحليل AI للأخبار وتأثيرها</div>
-                <div id="ai-news-feed" class="news-scroll">
-                    </div>
-            </div>
-
-            <div class="card indicators-box">
-                <div class="card-header"><i class="fas fa-chart-line"></i> مؤشرات RSI & MACD & التقييم الفني</div>
-                <div class="bottom-widgets">
-                    <div id="tv_indicators_chart"></div>
-                    <div id="tv_tech_rating"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="side-col">
-            <div class="card news-card">
-                <div class="card-header"><i class="fas fa-newspaper"></i> أخبار المال والشركات</div>
-                <div id="tv_news_timeline"></div>
-            </div>
-            
-            <div class="card">
-                <div class="card-header"><i class="fas fa-bell"></i> تنبيهات الفرص</div>
-                <div class="alerts-list">
-                    <div class="alert-box gold">
-                        <i class="fab fa-bitcoin"></i>
-                        <span>BTC/USDT</span>
-                        <small>Strong Buy</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+    <!-- حاوية الشارت العملاقة -->
+    <main class="chart-container">
+        <div id="tradingview_sfman_futures"></div>
     </main>
 
-    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <!-- استدعاء سكربت التشغيل -->
     <script src="script.js"></script>
 </body>
 </html>
