@@ -1,4 +1,4 @@
-// تشغيل الشارت ودمج مؤشر SFMAN المطور فور تحميل الصفحة مباشرة
+// تشغيل شارت العقود الآجلة لباينانس فور تحميل الصفحة تلقائياً مع دمج مؤشر SFMAN الجديد
 document.addEventListener("DOMContentLoaded", function() {
     new TradingView.widget({
         "width": "100%",
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
         "hide_side_toolbar": false,     // إظهار أدوات الرسم الجانبية للتحليل الفني
         "allow_symbol_change": true,   // يتيح لك تغيير الرمز واصطياد العملات الأخرى من موقعك
         "studies": [
-            "PUB;iuTBgYH2"             // استدعاء سكربتك المنشور رسميًا SFMAN Crypto Golden V30
+            "PUB;0qcprwlp"             // استدعاء سكربتك الجديد SFMAN Crypto Golden V30 باستخدام الـ ID الجديد!
         ],
         "container_id": "tradingview_sfman_futures"
     });
