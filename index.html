@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SFMAN FUTURES LIVE</title>
     <link rel="stylesheet" href="style.css">
-    <!-- استدعاء مكتبة تريدنج فيو المباشرة لتشغيل الشارت اللحظي -->
-    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <!-- استدعاء مكتبة الشارتات الخفيفة الرسمية لتريدنج فيو -->
+    <script src="https://unpkg.com/lightweight-charts/dist/lightweight_charts.standalone.production.js"></script>
 </head>
 <body>
 
-    <!-- شريط العناوين والبراندنج الخاص بك -->
+    <!-- الهيدر الاحترافي للموقع -->
     <header class="dashboard-header">
         <div class="logo-zone">
             <span class="live-indicator">⚡ LIVE</span>
@@ -21,12 +21,47 @@
         </div>
     </header>
 
-    <!-- حاوية الشارت العملاقة -->
-    <main class="chart-container">
-        <div id="tradingview_sfman_futures"></div>
+    <!-- منطقة الشارت والجدول الذهبي العائم -->
+    <main class="app-layout">
+        <div class="charts-wrapper">
+            <!-- حاوية الشارت الرئيسي (الشموع والاشارات والايشيموكو) -->
+            <div id="main-chart-container" class="chart-box"></div>
+            <!-- حاوية شارت الـ RSI السفلي المدمج -->
+            <div id="rsi-chart-container" class="chart-box rsi-box"></div>
+        </div>
+
+        <!-- الجدول الذهبي الملكي العائم بتحديث لحظي -->
+        <div class="golden-dashboard" id="golden-table">
+            <div class="table-header">مؤشر كريبتو جولدن V30 👑</div>
+            <div class="table-subheader">ICT + RSI Combo</div>
+            <div class="table-body">
+                <div class="table-row"><span class="label">المشترون 🐂</span><span class="value bull-text" id="val-buyers">--%</span></div>
+                <div class="table-row"><span class="label">البائعون 🐻</span><span class="value bear-text" id="val-sellers">--%</span></div>
+                <hr class="row-divider">
+                <div class="table-row"><span class="label">جلسة آسيا 🇯🇵</span><span class="value" id="session-asia">⏳</span></div>
+                <div class="table-row"><span class="label">جلسة لندن 🇬🇧</span><span class="value" id="session-london">⏳</span></div>
+                <div class="table-row"><span class="label">جلسة نيويورك 🇺🇸</span><span class="value" id="session-ny">⏳</span></div>
+                <hr class="row-divider">
+                <div class="table-row"><span class="label">قيمة الـ RSI</span><span class="value rsi-blue-text" id="val-rsi">0.00</span></div>
+                <div class="table-row"><span class="label">حالة تشبع RSI</span><span class="value" id="val-rsi-status">منطقة محايدة</span></div>
+                <div class="table-row"><span class="label">فرص الدايفرجينس</span><span class="value gold-text" id="val-div">لا يوجد</span></div>
+                <div class="table-row"><span class="label">سحابة الإيشيموكو</span><span class="value gold-text" id="val-ichimoku">--</span></div>
+                <hr class="row-divider">
+                <div class="table-row highlighted-row" id="win-rate-row">
+                    <span class="label">نسبة النجاح المتوقعة</span>
+                    <span class="value" id="val-winrate">60%</span>
+                </div>
+                <div class="table-row"><span class="label">قرار المضاربة</span><span class="value gold-text" id="val-decision">سكالب سريع ⚡</span></div>
+                <hr class="row-divider">
+                <div class="table-row"><span class="label">الدخول (Entry)</span><span class="value" id="val-entry">--</span></div>
+                <div class="table-row"><span class="label">الهدف 1 (TP1)</span><span class="value bull-text" id="val-tp1">--</span></div>
+                <div class="table-row"><span class="label">الهدف 2 (TP2)</span><span class="value gold-text" id="val-tp2">--</span></div>
+                <div class="table-row"><span class="label">الهدف 3 (TP3)</span><span class="value gold-text" id="val-tp3">--</span></div>
+                <div class="table-row"><span class="label">وقف الخسارة (SL)</span><span class="value bear-text" id="val-sl">--</span></div>
+            </div>
+        </div>
     </main>
 
-    <!-- استدعاء سكربت التهيئة والتشغيل -->
     <script src="script.js"></script>
 </body>
 </html>
