@@ -1,3 +1,4 @@
+/* تصفير الهوامش وتظبيط أبعاد الشاشة الافتراضية */
 * {
     margin: 0;
     padding: 0;
@@ -14,26 +15,28 @@ body {
     overflow: hidden;
 }
 
+/* تصميم الهيدر وشريط البراند والحقوق */
 .dashboard-header {
     background-color: #161a22;
-    padding: 10px 20px;
+    padding: 15px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 2px solid #2b3139;
-    height: 60px;
-    z-index: 10;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    height: 70px;
 }
 
 .logo-zone {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 15px;
 }
 
 .logo-zone h1 {
-    font-size: 18px;
+    font-size: 24px;
     font-weight: 800;
+    letter-spacing: 1px;
     background: linear-gradient(45deg, #f3ba2f, #f0b90b);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -42,9 +45,9 @@ body {
 .live-indicator {
     background-color: #ea3943;
     color: white;
-    padding: 3px 8px;
+    padding: 4px 10px;
     border-radius: 4px;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: bold;
     animation: blink 1.5s infinite;
 }
@@ -58,9 +61,9 @@ body {
     color: #0c0f14 !important;
     text-decoration: none;
     font-weight: bold;
-    padding: 8px 16px;
+    padding: 10px 20px;
     border-radius: 6px;
-    font-size: 12px;
+    font-size: 13px;
     transition: all 0.3s ease;
     box-shadow: 0 0 10px rgba(243, 186, 47, 0.4);
 }
@@ -70,54 +73,45 @@ body {
     box-shadow: 0 0 20px rgba(243, 186, 47, 0.8);
 }
 
-/* حركة النبض للزر */
 .pulse-anim {
     animation: pulse 2s infinite;
 }
 
-/* تخطيط التطبيق الرئيسي */
-.app-layout {
-    display: flex;
-    flex: 1;
+/* تخطيط مساحة الشارت والجدول العائم */
+.chart-layout {
     position: relative;
-    height: calc(100vh - 60px);
+    flex: 1;
     width: 100%;
+    height: calc(100vh - 70px);
 }
 
-/* حاوية الشارتات */
-.charts-wrapper {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+/* حاوية الشارت لملء المساحة بالكامل خلف الجدول */
+.chart-container {
+    width: 100%;
+    height: 100%;
+    background-color: #161a22;
+}
+
+#tradingview_sfman_futures {
+    width: 100%;
     height: 100%;
 }
 
-.chart-box {
-    flex: 3;
-    width: 100%;
-    position: relative;
-}
-
-.rsi-box {
-    flex: 1;
-    border-top: 2px solid #2b3139;
-}
-
-/* الجدول الذهبي الملكي العائم */
+/* الجدول الذهبي الملكي العائم بتأثير شفاف وراقي */
 .golden-dashboard {
     width: 290px;
-    background-color: #0c0f14e6;
+    background-color: rgba(12, 15, 20, 0.92);
     border: 1px solid #ffd70080;
     border-radius: 8px;
     position: absolute;
-    top: 15px;
-    right: 15px;
-    z-index: 5;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 215, 0, 0.15);
+    top: 20px;
+    right: 20px;
+    z-index: 99; /* للتأكد من طفوه فوق شارت تريدنج فيو المباشر */
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.9), 0 0 15px rgba(255, 215, 0, 0.2);
     overflow: hidden;
-    max-height: 95%;
+    max-height: 90%;
     overflow-y: auto;
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(10px);
 }
 
 .table-header {
@@ -125,7 +119,7 @@ body {
     color: #0c0f14;
     font-weight: bold;
     text-align: center;
-    padding: 8px;
+    padding: 10px;
     font-size: 14px;
 }
 
@@ -139,13 +133,13 @@ body {
 }
 
 .table-body {
-    padding: 10px;
+    padding: 12px;
 }
 
 .table-row {
     display: flex;
     justify-content: space-between;
-    padding: 5px 0;
+    padding: 6px 0;
     font-size: 12px;
 }
 
@@ -167,7 +161,7 @@ body {
 .row-divider {
     border: 0;
     border-top: 1px solid #2b3139;
-    margin: 6px 0;
+    margin: 8px 0;
 }
 
 /* منطقة زر التسجيل داخل الجدول */
@@ -184,7 +178,7 @@ body {
     text-decoration: none;
     font-size: 11px;
     font-weight: bold;
-    padding: 8px;
+    padding: 10px;
     border-radius: 4px;
     transition: all 0.3s ease;
 }
@@ -194,18 +188,20 @@ body {
     color: #0c0f14 !important;
 }
 
-/* ستايل الألوان الفنية */
+/* ألوان المؤشرات الفنية */
 .bull-text { color: #02c076; }
 .bear-text { color: #ea3943; }
 .gold-text { color: #f3ba2f; }
 .rsi-blue-text { color: #2962ff; }
 
+/* أنيميشن نبض لمؤشر الـ LIVE */
 @keyframes blink {
     0% { opacity: 1; }
     50% { opacity: 0.4; }
     100% { opacity: 1; }
 }
 
+/* أنيميشن نبض زر الإحالة */
 @keyframes pulse {
     0% {
         box-shadow: 0 0 0 0 rgba(243, 186, 47, 0.7);
@@ -218,16 +214,24 @@ body {
     }
 }
 
+/* تحسين تجاوب التصميم مع الهواتف الذكية والشاشات الصغيرة */
 @media (max-width: 768px) {
-    .app-layout {
+    .chart-layout {
+        display: flex;
         flex-direction: column-reverse;
+        height: calc(100vh - 70px);
+    }
+    .chart-container {
+        flex: 1;
+        height: 50% !important;
     }
     .golden-dashboard {
         position: static;
         width: 100%;
-        max-height: none;
+        max-height: 50%;
         border-radius: 0;
         border: none;
         border-top: 2px solid #ffd700;
+        overflow-y: auto;
     }
 }
