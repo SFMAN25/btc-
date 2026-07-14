@@ -32,7 +32,7 @@ body {
 }
 
 .logo-zone h1 {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 800;
     background: linear-gradient(45deg, #f3ba2f, #f0b90b);
     -webkit-background-clip: text;
@@ -49,14 +49,30 @@ body {
     animation: blink 1.5s infinite;
 }
 
-.credits p {
+/* ستايل زر الإحالة في الهيدر */
+.referral-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(45deg, #f3ba2f, #ffd700);
+    color: #0c0f14 !important;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 6px;
     font-size: 12px;
-    color: #848e9c;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(243, 186, 47, 0.4);
 }
 
-.author-name {
-    color: #02c076;
-    font-weight: bold;
+.referral-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(243, 186, 47, 0.8);
+}
+
+/* حركة النبض للزر */
+.pulse-anim {
+    animation: pulse 2s infinite;
 }
 
 /* تخطيط التطبيق الرئيسي */
@@ -89,7 +105,7 @@ body {
 
 /* الجدول الذهبي الملكي العائم */
 .golden-dashboard {
-    width: 280px;
+    width: 290px;
     background-color: #0c0f14e6;
     border: 1px solid #ffd70080;
     border-radius: 8px;
@@ -154,6 +170,30 @@ body {
     margin: 6px 0;
 }
 
+/* منطقة زر التسجيل داخل الجدول */
+.table-referral-zone {
+    margin-top: 12px;
+    text-align: center;
+}
+
+.table-referral-btn {
+    display: block;
+    background-color: #161a22;
+    color: #ffd700 !important;
+    border: 1px dashed #ffd700;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 8px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.table-referral-btn:hover {
+    background-color: #ffd700;
+    color: #0c0f14 !important;
+}
+
 /* ستايل الألوان الفنية */
 .bull-text { color: #02c076; }
 .bear-text { color: #ea3943; }
@@ -164,6 +204,18 @@ body {
     0% { opacity: 1; }
     50% { opacity: 0.4; }
     100% { opacity: 1; }
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(243, 186, 47, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 8px rgba(243, 186, 47, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(243, 186, 47, 0);
+    }
 }
 
 @media (max-width: 768px) {
