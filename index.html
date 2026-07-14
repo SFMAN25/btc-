@@ -5,35 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SFMAN FUTURES LIVE</title>
     <link rel="stylesheet" href="style.css">
-    <!-- استدعاء مكتبة الشارتات الخفيفة الرسمية لتريدنج فيو -->
-    <script src="https://unpkg.com/lightweight-charts/dist/lightweight_charts.standalone.production.js"></script>
+    <!-- استدعاء مكتبة تريدنج فيو المباشرة لتشغيل الشارت اللحظي المضمون -->
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
 </head>
 <body>
 
-    <!-- الهيدر الاحترافي للموقع -->
+    <!-- شريط العناوين والبراندنج وزر التداول المباشر برابط إحالتك -->
     <header class="dashboard-header">
         <div class="logo-zone">
             <span class="live-indicator">LIVE ⚡</span>
             <h1>SFMAN FUTURES LIVE</h1>
         </div>
         <div class="header-actions">
-            <!-- زر الإحالة الذهبي في الهيدر -->
+            <!-- زر الإحالة المضيء لزيادة أرباحك وعمولاتك -->
             <a href="https://www.binance.bh/en/futures/BTCUSDT?ref=1251992999" target="_blank" class="referral-btn pulse-anim">
                 تداول BTC الآن ↗️
             </a>
         </div>
     </header>
 
-    <!-- منطقة الشارت والجدول الذهبي العائم -->
-    <main class="app-layout">
-        <div class="charts-wrapper">
-            <!-- حاوية الشارت الرئيسي (الشموع والاشارات والايشيموكو) -->
-            <div id="main-chart-container" class="chart-box"></div>
-            <!-- حاوية شارت الـ RSI السفلي المدمج -->
-            <div id="rsi-chart-container" class="chart-box rsi-box"></div>
+    <!-- منطقة العرض الكبرى (الشارت وبداخله الجدول العائم) -->
+    <main class="chart-layout">
+        <!-- حاوية الشارت لملء المساحة المتبقية بالكامل -->
+        <div class="chart-container">
+            <div id="tradingview_sfman_futures"></div>
         </div>
 
-        <!-- الجدول الذهبي الملكي العائم بتحديث لحظي -->
+        <!-- الجدول الذهبي الملكي العائم بتحديث لحظي في الخلفية -->
         <div class="golden-dashboard" id="golden-table">
             <div class="table-header">مؤشر كريبتو جولدن V30 👑</div>
             <div class="table-subheader">ICT + RSI Combo</div>
@@ -62,7 +60,7 @@
                 <div class="table-row"><span class="label">الهدف 3 (TP3)</span><span class="value gold-text" id="val-tp3">--</span></div>
                 <div class="table-row"><span class="label">وقف الخسارة (SL)</span><span class="value bear-text" id="val-sl">--</span></div>
                 
-                <!-- زر الإحالة الإضافي داخل الجدول -->
+                <!-- زر الإحالة الإضافي داخل الجدول لضمان النقرات -->
                 <div class="table-referral-zone">
                     <a href="https://www.binance.bh/en/futures/BTCUSDT?ref=1251992999" target="_blank" class="table-referral-btn">
                         سجل في Binance وابدأ التداول 👑
@@ -72,6 +70,7 @@
         </div>
     </main>
 
+    <!-- استدعاء سكربت التهيئة والتشغيل اللحظي للمحركات -->
     <script src="script.js"></script>
 </body>
 </html>
